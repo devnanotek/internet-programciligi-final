@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="İslam ERGÜN - DEVNANOTEK">
+    <title>Test - İnternet Programcılığı-I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .option-btn {
+            transition: all 0.2s ease;
+        }
+        .option-btn:hover:not(.disabled) {
+            transform: translateX(4px);
+        }
+        .option-btn.selected {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .option-btn.correct {
+            background-color: #22c55e !important;
+            color: white !important;
+            border-color: #16a34a !important;
+        }
+        .option-btn.wrong {
+            background-color: #ef4444 !important;
+            color: white !important;
+            border-color: #dc2626 !important;
+        }
+        .option-btn.disabled {
+            opacity: 0.8;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .nav-dot {
+            transition: all 0.2s ease;
+        }
+        .nav-dot:hover {
+            transform: scale(1.1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes pulse-scale {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .pulse-once {
+            animation: pulse-scale 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-bold text-orange-400">PHP</span>
+                    <span class="hidden sm:inline text-gray-300 text-sm">İnternet Programcılığı-I</span>
+                </div>
+                <div class="flex space-x-1 sm:space-x-4">
+                    <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition">Ana Sayfa</a>
+                    <a href="calisma.html" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition">Çalışma</a>
+                    <a href="soru-cevap.html" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition">Soru-Cevap</a>
+                    <a href="test.html" class="px-3 py-2 rounded-md text-sm font-medium bg-orange-500 text-white hover:bg-orange-600 transition">Test</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 py-10 sm:py-16">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg">PHP Bilgi Testi</h1>
+            <p class="mt-2 text-white/90 text-lg">20 soru ile PHP bilgini test et!</p>
+            <p class="mt-1 text-white/70 text-sm">Öğr. Gör. Merve BABAOĞLU</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 py-8 w-full">
+
+        <!-- Quiz Container -->
+        <div id="quizContainer" class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 fade-in">
+            <!-- Progress Bar -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm text-gray-500">İlerleme</span>
+                    <span class="text-sm font-semibold text-gray-700"><span id="progressCurrent">1</span> / 20</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                    <div id="progressBar" class="bg-gradient-to-r from-orange-400 to-amber-500 h-3 rounded-full transition-all duration-500" style="width: 5%"></div>
+                </div>
+            </div>
+
+            <!-- Question Type Badge -->
+            <div class="mb-4">
+                <span id="questionTypeBadge" class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">Çoktan Seçmeli</span>
+            </div>
+
+            <!-- Question -->
+            <div id="questionArea" class="fade-in">
+                <h2 id="questionText" class="text-xl font-bold text-gray-800 mb-6"></h2>
+                <div id="optionsArea" class="space-y-3 mb-4"></div>
+                <div id="fillBlankArea" class="mb-4 hidden"></div>
+                <div id="explanationArea" class="hidden p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 text-sm mt-4"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-6 pt-4 border-t border-gray-200">
+                <div class="flex gap-2">
+                    <button id="prevBtn" onclick="prevQuestion()" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg text-sm font-medium transition disabled:opacity-50 disabled:cursor-not-allowed">← Önceki</button>
+                    <button id="checkBtn" onclick="checkAnswer()" class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition">Kontrol Et</button>
+                    <button id="nextBtn" onclick="nextQuestion()" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg text-sm font-medium transition disabled:opacity-50 disabled:cursor-not-allowed">Sonraki →</button>
+                </div>
+                <button id="finishBtn" onclick="finishTest()" class="px-5 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium transition">Testi Bitir</button>
+            </div>
+        </div>
+
+        <!-- Question Navigator -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mt-6">
+            <h3 class="text-sm font-semibold text-gray-700 mb-3">Soru Gezgini</h3>
+            <div id="questionNavigator" class="grid grid-cols-5 sm:grid-cols-10 gap-2"></div>
+            <div class="flex flex-wrap items-center gap-4 mt-4 text-xs text-gray-500">
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-green-500 inline-block"></span> Doğru</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-red-500 inline-block"></span> Yanlış</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-gray-300 inline-block"></span> Cevapsız</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-white border-2 border-blue-500 inline-block"></span> Şu anki</span>
+            </div>
+        </div>
+
+        <!-- Result Screen (hidden initially) -->
+        <div id="resultContainer" class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mt-6 hidden fade-in">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🏆</div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Test Tamamlandı!</h2>
+                <p id="resultMessage" class="text-lg text-gray-600 mb-4"></p>
+                <div class="text-5xl font-extrabold mb-2" id="resultPercentage"></div>
+                <p class="text-gray-500 mb-6"><span id="resultCorrect">0</span> doğru / 20 soru</p>
+
+                <!-- Result Progress Bar -->
+                <div class="w-3/4 mx-auto bg-gray-200 rounded-full h-4 overflow-hidden mb-8">
+                    <div id="resultProgressBar" class="h-4 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                </div>
+
+                <!-- Answer Review -->
+                <div class="text-left">
+                    <h3 class="font-bold text-gray-700 mb-3 text-center">Cevapların</h3>
+                    <div id="answerReview" class="space-y-2 max-h-96 overflow-y-auto"></div>
+                </div>
+
+                <button onclick="restartTest()" class="mt-6 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition">Testi Yeniden Başlat</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-6 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm">
+            <p>İnternet Programcılığı-I | 2025-2026 Dönemi &copy; 2026</p>
+            <p class="mt-1 text-gray-500">Hazırlayan: <strong>İslam ERGÜN - DEVNANOTEK</strong></p>
+        </div>
+    </footer>
+
+<script>
+// ============================================================
+// QUESTION DATA
+// ============================================================
+const questions = [
+    {
+        id: 1,
+        type: 'multiple',
+        question: 'PHP\'nin açılımı nedir?',
+        options: [
+            'A) Personal Home Page',
+            'B) PHP: Hypertext Preprocessor',
+            'C) Programming Hypertext Processor',
+            'D) Public Hosting Platform'
+        ],
+        correct: 1,
+        explanation: 'PHP\'nin güncel açılımı \'PHP: Hypertext Preprocessor\'dur.'
+    },
+    {
+        id: 2,
+        type: 'truefalse',
+        question: 'PHP kodları tarayıcıda çalışır.',
+        correct: false,
+        explanation: 'YANLIŞ! PHP kodları sunucuda (server-side) çalışır. Kullanıcı sadece sonucu (HTML) görür.'
+    },
+    {
+        id: 3,
+        type: 'multiple',
+        question: 'Aşağıdaki değişken tanımlamalarından hangisi DOĞRU\'dur?',
+        options: [
+            'A) $2sayi = 10;',
+            'B) $sayi 2 = 10;',
+            'C) $_sayi2 = 10;',
+            'D) $sayi% = 10;'
+        ],
+        correct: 2,
+        explanation: 'Değişken isimleri harf veya alt çizgi (_) ile başlamalı, rakam ile başlayamaz ve özel karakter içeremez.'
+    },
+    {
+        id: 4,
+        type: 'fillblank',
+        question: 'PHP\'de ekrana yazdırmak için kullanılan komut ______ ve ______\'dır.',
+        correct: 'echo',
+        acceptAnswers: ['echo', 'print'],
+        explanation: 'PHP\'de ekrana yazdırmak için en sık kullanılan komutlar echo ve print\'tir. echo birden fazla parametre alabilirken, print tek parametre alır ve 1 döndürür.'
+    },
+    {
+        id: 5,
+        type: 'multiple',
+        question: 'Aşağıdakilerden hangisi XAMPP paketinde BULUNMAZ?',
+        options: [
+            'A) Apache',
+            'B) PHP',
+            'C) MySQL',
+            'D) Visual Studio'
+        ],
+        correct: 3,
+        explanation: 'XAMPP; Apache, MariaDB/MySQL, PHP ve Perl içerir. Visual Studio bir IDE olup XAMPP paketinde bulunmaz.'
+    },
+    {
+        id: 6,
+        type: 'truefalse',
+        question: 'Değişken isimlerinde büyük-küçük harf önemlidir. ($toplam ≠ $Toplam)',
+        correct: true,
+        explanation: 'DOĞRU! PHP değişken isimleri büyük-küçük harfe duyarlıdır (case-sensitive). $toplam ve $Toplam farklı değişkenlerdir.'
+    },
+    {
+        id: 7,
+        type: 'multiple',
+        question: 'String birleştirme operatörü hangisidir?',
+        options: [
+            'A) +',
+            'B) .',
+            'C) &',
+            'D) ,'
+        ],
+        correct: 1,
+        explanation: 'PHP\'de string birleştirme (concatenation) operatörü nokta (.) işaretidir.'
+    },
+    {
+        id: 8,
+        type: 'multiple',
+        question: 'PHP\'de tek satırlık yorum hangi işaret(ler)le yapılır?',
+        options: [
+            'A) /* */',
+            'B) //',
+            'C) # ve //',
+            'D) Hepsi'
+        ],
+        correct: 2,
+        explanation: 'PHP\'de tek satırlık yorumlar // ve # ile yapılır. /* */ çok satırlı yorum içindir.'
+    },
+    {
+        id: 9,
+        type: 'truefalse',
+        question: 'header() fonksiyonu ekrana çıktı gönderildikten sonra kullanılabilir.',
+        correct: false,
+        explanation: 'YANLIŞ! header() fonksiyonu, ekrana herhangi bir çıktı gönderilmeden ÖNCE kullanılmalıdır.'
+    },
+    {
+        id: 10,
+        type: 'multiple',
+        question: 'for döngüsünün doğru yazılışı hangisidir?',
+        options: [
+            'A) for ($i=0; $i<10; $i++)',
+            'B) for $i=0 to 10',
+            'C) for ($i=0; $i++)',
+            'D) for $i < 10; $i++'
+        ],
+        correct: 0,
+        explanation: 'PHP\'de for döngüsü sözdizimi: for (başlangıç; koşul; artış) { ... }'
+    },
+    {
+        id: 11,
+        type: 'multiple',
+        question: '++$a ve $a++ arasındaki fark nedir?',
+        options: [
+            'A) Fark yoktur',
+            'B) ++$a önce artırır sonra kullanır, $a++ önce kullanır sonra artırır',
+            'C) ++$a sadece çift sayılar için çalışır',
+            'D) $a++ değişkeni azaltır'
+        ],
+        correct: 1,
+        explanation: '++$a (pre-increment): önce değeri 1 artırır, sonra kullanır. $a++ (post-increment): önce mevcut değeri kullanır, sonra artırır.'
+    },
+    {
+        id: 12,
+        type: 'multiple',
+        question: 'Bir dizinin eleman sayısını hangi fonksiyon verir?',
+        options: [
+            'A) length()',
+            'B) count()',
+            'C) size()',
+            'D) total()'
+        ],
+        correct: 1,
+        explanation: 'PHP\'de bir dizinin eleman sayısını count() fonksiyonu ile öğreniriz.'
+    },
+    {
+        id: 13,
+        type: 'truefalse',
+        question: 'Switch yapısında break kullanmazsak tüm case\'ler çalışır.',
+        correct: true,
+        explanation: 'DOĞRU! Switch yapısında break kullanılmadığında "fall-through" oluşur ve eşleşen case\'den sonraki tüm case\'ler çalıştırılır.'
+    },
+    {
+        id: 14,
+        type: 'multiple',
+        question: 'isset() fonksiyonu ne yapar?',
+        options: [
+            'A) Değişkeni siler',
+            'B) Değişkenin tanımlı olup olmadığını kontrol eder',
+            'C) Değişkenin tipini değiştirir',
+            'D) Değişkeni boşaltır'
+        ],
+        correct: 1,
+        explanation: 'isset() fonksiyonu, değişkenin tanımlı olup olmadığını ve NULL olup olmadığını kontrol eder.'
+    },
+    {
+        id: 15,
+        type: 'multiple',
+        question: 'Aşağıdaki hangisi PHP\'de sabit tanımlamak için kullanılır?',
+        options: [
+            'A) constant()',
+            'B) define()',
+            'C) var()',
+            'D) let()'
+        ],
+        correct: 1,
+        explanation: 'PHP\'de sabitler define() fonksiyonu veya const anahtar kelimesi ile tanımlanır.'
+    },
+    {
+        id: 16,
+        type: 'fillblank',
+        question: 'PHP\'de sabit tanımlamak için ______("PI", 3.14) fonksiyonu kullanılır.',
+        correct: 'define',
+        acceptAnswers: ['define'],
+        explanation: 'define("PI", 3.14) ifadesi PI adında ve 3.14 değerinde bir sabit tanımlar.'
+    },
+    {
+        id: 17,
+        type: 'multiple',
+        question: '$a % $b operatörü ne işlem yapar?',
+        options: [
+            'A) Üs alma',
+            'B) Yüzde hesaplama',
+            'C) Bölme işleminden kalanı verir (mod)',
+            'D) String birleştirme'
+        ],
+        correct: 2,
+        explanation: '% (modülüs) operatörü bölme işleminden kalanı verir. Örnek: 10 % 3 = 1'
+    },
+    {
+        id: 18,
+        type: 'truefalse',
+        question: 'if ile yapılan her şey switch ile de yapılabilir.',
+        correct: false,
+        explanation: 'YANLIŞ! Switch ile yaptıklarımızın hepsini if ile yaparız ama if ile yaptığımız her şeyi switch ile yapamayız.'
+    },
+    {
+        id: 19,
+        type: 'multiple',
+        question: 'Bir fonksiyonu başka bir dosyadan çağırmak için hangi ifade kullanılır?',
+        options: [
+            'A) import',
+            'B) include',
+            'C) load',
+            'D) fetch'
+        ],
+        correct: 1,
+        explanation: 'include ve require ifadeleri dışarıdan dosya dahil etmek için kullanılır. require dosya bulunamazsa fatal error verir.'
+    },
+    {
+        id: 20,
+        type: 'multiple',
+        question: 'while döngüsü ile for döngüsü arasındaki fark nedir?',
+        options: [
+            'A) Hiçbir fark yoktur',
+            'B) while sadece 1 kez çalışır',
+            'C) for belirli sayıda, while koşul sağlandıkça çalışır',
+            'D) while daha hızlıdır'
+        ],
+        correct: 2,
+        explanation: 'for döngüsü genellikle tekrar sayısı bilindiğinde, while döngüsü ise bir koşul sağlandığı sürece çalıştırılmak istendiğinde kullanılır.'
+    }
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let currentIndex = 0;
+let answers = {};          // { index: userAnswer }
+let checked = {};          // { index: true/false }
+let isCorrect = {};        // { index: true/false }
+
+// ============================================================
+// INITIALIZATION
+// ============================================================
+function initQuiz() {
+    currentIndex = 0;
+    answers = {};
+    checked = {};
+    isCorrect = {};
+    document.getElementById('resultContainer').classList.add('hidden');
+    document.getElementById('quizContainer').classList.remove('hidden');
+    renderQuestion();
+    renderNavigator();
+}
+
+function restartTest() {
+    initQuiz();
+    document.getElementById('resultContainer').classList.add('hidden');
+    document.getElementById('quizContainer').classList.remove('hidden');
+    document.getElementById('questionArea').parentElement.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============================================================
+// RENDER QUESTION
+// ============================================================
+function renderQuestion() {
+    const q = questions[currentIndex];
+    const qArea = document.getElementById('questionArea');
+
+    // Update progress
+    document.getElementById('progressCurrent').textContent = currentIndex + 1;
+    const pct = ((currentIndex + 1) / questions.length) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+
+    // Type badge
+    const badge = document.getElementById('questionTypeBadge');
+    if (q.type === 'multiple') {
+        badge.textContent = 'Çoktan Seçmeli';
+        badge.className = 'inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700';
+    } else if (q.type === 'truefalse') {
+        badge.textContent = 'Doğru/Yanlış';
+        badge.className = 'inline-block px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-700';
+    } else {
+        badge.textContent = 'Boşluk Doldurma';
+        badge.className = 'inline-block px-3 py-1 rounded-full text-xs font-semibold bg-teal-100 text-teal-700';
+    }
+
+    // Question text
+    document.getElementById('questionText').textContent = 'Soru ' + q.id + ': ' + q.question;
+
+    // Options / True-False / Fill-blank
+    const optsArea = document.getElementById('optionsArea');
+    const fillArea = document.getElementById('fillBlankArea');
+    const explArea = document.getElementById('explanationArea');
+
+    optsArea.innerHTML = '';
+    fillArea.innerHTML = '';
+    fillArea.classList.add('hidden');
+    optsArea.classList.remove('hidden');
+    explArea.classList.add('hidden');
+
+    if (q.type === 'multiple') {
+        q.options.forEach((opt, i) => {
+            const label = String.fromCharCode(65 + i); // A, B, C, D
+            const btn = document.createElement('button');
+            btn.className = 'option-btn w-full text-left px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium flex items-center gap-3';
+            btn.innerHTML = '<span class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 text-white text-sm font-bold flex-shrink-0">' + label + '</span><span>' + opt.substring(3) + '</span>';
+            btn.onclick = function() { selectOption(currentIndex, i, q.type); };
+            btn.setAttribute('data-option-index', i);
+
+            // If already checked
+            if (checked[currentIndex]) {
+                btn.classList.add('disabled');
+                if (i === q.correct) {
+                    btn.classList.add('correct');
+                    btn.querySelector('span').classList.add('bg-green-600');
+                    btn.querySelector('span').classList.remove('bg-gray-300');
+                }
+                const userAns = answers[currentIndex];
+                if (i === userAns && userAns !== q.correct) {
+                    btn.classList.add('wrong');
+                    btn.querySelector('span').classList.add('bg-red-600');
+                    btn.querySelector('span').classList.remove('bg-gray-300');
+                }
+            } else if (answers[currentIndex] === i) {
+                btn.classList.add('selected');
+                btn.querySelector('span').classList.add('bg-blue-500');
+                btn.querySelector('span').classList.remove('bg-gray-300');
+            }
+
+            optsArea.appendChild(btn);
+        });
+    } else if (q.type === 'truefalse') {
+        const trueBtn = document.createElement('button');
+        trueBtn.className = 'option-btn w-full text-left px-4 py-4 rounded-lg border-2 border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold text-lg flex items-center justify-center gap-2';
+        trueBtn.textContent = 'DOĞRU';
+        trueBtn.onclick = function() { selectOption(currentIndex, true, q.type); };
+        trueBtn.setAttribute('data-option-index', 'true');
+
+        const falseBtn = document.createElement('button');
+        falseBtn.className = 'option-btn w-full text-left px-4 py-4 rounded-lg border-2 border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold text-lg flex items-center justify-center gap-2';
+        falseBtn.textContent = 'YANLIŞ';
+        falseBtn.onclick = function() { selectOption(currentIndex, false, q.type); };
+        falseBtn.setAttribute('data-option-index', 'false');
+
+        if (checked[currentIndex]) {
+            trueBtn.classList.add('disabled');
+            falseBtn.classList.add('disabled');
+            if (q.correct === true) {
+                trueBtn.classList.add('correct');
+            } else {
+                falseBtn.classList.add('correct');
+            }
+            const userAns = answers[currentIndex];
+            if (userAns !== q.correct) {
+                if (userAns === true) trueBtn.classList.add('wrong');
+                if (userAns === false) falseBtn.classList.add('wrong');
+            }
+        } else {
+            if (answers[currentIndex] === true) trueBtn.classList.add('selected');
+            if (answers[currentIndex] === false) falseBtn.classList.add('selected');
+        }
+
+        optsArea.appendChild(trueBtn);
+        optsArea.appendChild(falseBtn);
+    } else if (q.type === 'fillblank') {
+        optsArea.classList.add('hidden');
+        fillArea.classList.remove('hidden');
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'relative';
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:border-blue-400 transition';
+        input.placeholder = 'Cevabınızı yazın...';
+        input.id = 'fillBlankInput';
+        input.value = answers[currentIndex] || '';
+
+        if (checked[currentIndex]) {
+            input.disabled = true;
+            input.classList.add('bg-gray-100');
+        }
+
+        input.addEventListener('input', function() {
+            answers[currentIndex] = this.value.trim();
+            renderNavigator();
+        });
+
+        // Icon wrapper
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-xl hidden';
+        iconSpan.id = 'fillCheckIcon';
+
+        wrapper.appendChild(input);
+        wrapper.appendChild(iconSpan);
+        fillArea.appendChild(wrapper);
+
+        if (checked[currentIndex]) {
+            const icon = document.getElementById('fillCheckIcon');
+            if (icon) {
+                icon.classList.remove('hidden');
+                if (isCorrect[currentIndex]) {
+                    icon.textContent = '✅';
+                } else {
+                    icon.textContent = '❌';
+                }
+            }
+        }
+    }
+
+    // Show explanation if checked
+    if (checked[currentIndex]) {
+        explArea.classList.remove('hidden');
+        if (q.explanation) {
+            explArea.textContent = '💡 ' + q.explanation;
+        }
+    }
+
+    // Update navigation buttons
+    document.getElementById('prevBtn').disabled = currentIndex === 0;
+    document.getElementById('nextBtn').disabled = false;
+    document.getElementById('checkBtn').disabled = checked[currentIndex];
+
+    // Update navigator highlight
+    renderNavigator();
+
+    // Scroll to question
+    qArea.classList.remove('fade-in');
+    void qArea.offsetWidth;
+    qArea.classList.add('fade-in');
+}
+
+// ============================================================
+// SELECT OPTION
+// ============================================================
+function selectOption(questionIndex, value, type) {
+    if (checked[questionIndex]) return;
+    answers[questionIndex] = value;
+
+    if (type === 'multiple') {
+        const q = questions[questionIndex];
+        const buttons = document.querySelectorAll('#optionsArea button');
+        buttons.forEach((btn, i) => {
+            const span = btn.querySelector('span');
+            if (i === value) {
+                btn.classList.add('selected');
+                span.classList.add('bg-blue-500');
+                span.classList.remove('bg-gray-300');
+            } else {
+                btn.classList.remove('selected');
+                span.classList.remove('bg-blue-500');
+                span.classList.add('bg-gray-300');
+            }
+        });
+    } else if (type === 'truefalse') {
+        const buttons = document.querySelectorAll('#optionsArea button');
+        buttons.forEach(btn => {
+            btn.classList.remove('selected');
+            if (btn.getAttribute('data-option-index') === String(value)) {
+                btn.classList.add('selected');
+            }
+        });
+    }
+
+    document.getElementById('checkBtn').disabled = false;
+    renderNavigator();
+}
+
+// ============================================================
+// CHECK ANSWER
+// ============================================================
+function checkAnswer() {
+    const q = questions[currentIndex];
+    let userAnswer;
+
+    if (q.type === 'fillblank') {
+        const input = document.getElementById('fillBlankInput');
+        if (!input) return;
+        userAnswer = input.value.trim().toLowerCase();
+        if (!userAnswer) {
+            alert('Lütfen bir cevap yazın.');
+            return;
+        }
+        answers[currentIndex] = userAnswer;
+    } else {
+        if (answers[currentIndex] === undefined) {
+            alert('Lütfen bir seçim yapın.');
+            return;
+        }
+        userAnswer = answers[currentIndex];
+    }
+
+    // Evaluate
+    let correct;
+    if (q.type === 'fillblank') {
+        correct = q.acceptAnswers.some(a => a.toLowerCase() === userAnswer);
+    } else if (q.type === 'truefalse') {
+        correct = userAnswer === q.correct;
+    } else {
+        correct = userAnswer === q.correct;
+    }
+
+    checked[currentIndex] = true;
+    isCorrect[currentIndex] = correct;
+
+    // Show explanation
+    const explArea = document.getElementById('explanationArea');
+    explArea.classList.remove('hidden');
+    if (q.explanation) {
+        explArea.textContent = '💡 ' + q.explanation;
+    }
+
+    // Highlight options
+    if (q.type === 'multiple') {
+        const buttons = document.querySelectorAll('#optionsArea button');
+        buttons.forEach((btn, i) => {
+            btn.classList.add('disabled');
+            const span = btn.querySelector('span');
+            span.classList.remove('bg-blue-500', 'bg-gray-300');
+            if (i === q.correct) {
+                btn.classList.add('correct');
+                span.classList.add('bg-green-600');
+            }
+            if (i === userAnswer && i !== q.correct) {
+                btn.classList.add('wrong');
+                span.classList.add('bg-red-600');
+            }
+        });
+    } else if (q.type === 'truefalse') {
+        const buttons = document.querySelectorAll('#optionsArea button');
+        buttons.forEach(btn => {
+            btn.classList.add('disabled');
+            const btnVal = btn.getAttribute('data-option-index') === 'true';
+            if (btnVal === q.correct) {
+                btn.classList.add('correct');
+            }
+            if (btnVal === userAnswer && btnVal !== q.correct) {
+                btn.classList.add('wrong');
+            }
+        });
+    } else if (q.type === 'fillblank') {
+        const input = document.getElementById('fillBlankInput');
+        const icon = document.getElementById('fillCheckIcon');
+        if (input) input.disabled = true;
+        if (icon) {
+            icon.classList.remove('hidden');
+            if (correct) {
+                icon.textContent = '✅';
+            } else {
+                icon.textContent = '❌';
+            }
+        }
+    }
+
+    document.getElementById('checkBtn').disabled = true;
+    renderNavigator();
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function prevQuestion() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+    }
+}
+
+function nextQuestion() {
+    if (currentIndex < questions.length - 1) {
+        currentIndex++;
+        renderQuestion();
+    }
+}
+
+// ============================================================
+// QUESTION NAVIGATOR
+// ============================================================
+function renderNavigator() {
+    const container = document.getElementById('questionNavigator');
+    container.innerHTML = '';
+
+    questions.forEach((q, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'nav-dot w-full aspect-square rounded-lg text-xs font-bold flex items-center justify-center transition';
+        dot.textContent = i + 1;
+
+        if (i === currentIndex) {
+            dot.classList.add('ring-2', 'ring-blue-500', 'ring-offset-2', 'bg-white', 'text-blue-600');
+        }
+
+        if (checked[i]) {
+            if (isCorrect[i]) {
+                dot.classList.add('bg-green-500', 'text-white');
+                if (i !== currentIndex) dot.classList.remove('bg-white', 'text-blue-600', 'ring-2', 'ring-blue-500', 'ring-offset-2');
+            } else {
+                dot.classList.add('bg-red-500', 'text-white');
+                if (i !== currentIndex) dot.classList.remove('bg-white', 'text-blue-600', 'ring-2', 'ring-blue-500', 'ring-offset-2');
+            }
+        } else if (i !== currentIndex) {
+            dot.classList.add('bg-gray-300', 'text-gray-600');
+        }
+
+        if (answers[i] !== undefined && !checked[i]) {
+            dot.classList.add('bg-amber-100', 'text-amber-700', 'border', 'border-amber-400');
+            if (i === currentIndex) {
+                dot.classList.add('ring-2', 'ring-blue-500', 'ring-offset-2');
+            }
+        }
+
+        dot.onclick = function() {
+            currentIndex = i;
+            renderQuestion();
+        };
+
+        container.appendChild(dot);
+    });
+}
+
+// ============================================================
+// FINISH TEST
+// ============================================================
+function finishTest() {
+    const unanswered = questions.length - Object.keys(checked).length;
+    if (unanswered > 0) {
+        if (!confirm(unanswered + ' soru cevaplanmadı. Testi bitirmek istediğinize emin misiniz?')) {
+            return;
+        }
+    }
+
+    let correctCount = 0;
+    questions.forEach((q, i) => {
+        if (isCorrect[i]) correctCount++;
+    });
+
+    const percentage = Math.round((correctCount / questions.length) * 100);
+
+    // Hide quiz, show result
+    document.getElementById('quizContainer').classList.add('hidden');
+    document.getElementById('resultContainer').classList.remove('hidden');
+
+    document.getElementById('resultPercentage').textContent = '%' + percentage;
+    document.getElementById('resultCorrect').textContent = correctCount;
+
+    // Color-coded message
+    const msgEl = document.getElementById('resultMessage');
+    const pctEl = document.getElementById('resultPercentage');
+    if (percentage >= 85) {
+        msgEl.textContent = 'Mükemmel! Harika bir sonuç!';
+        pctEl.className = 'text-5xl font-extrabold mb-2 text-green-500';
+        document.getElementById('resultProgressBar').className = 'h-4 rounded-full transition-all duration-1000 bg-green-500';
+    } else if (percentage >= 70) {
+        msgEl.textContent = 'Çok iyi! Biraz daha pratikle mükemmel olacak.';
+        pctEl.className = 'text-5xl font-extrabold mb-2 text-blue-500';
+        document.getElementById('resultProgressBar').className = 'h-4 rounded-full transition-all duration-1000 bg-blue-500';
+    } else if (percentage >= 50) {
+        msgEl.textContent = 'İyi. Daha çok çalışmalısın.';
+        pctEl.className = 'text-5xl font-extrabold mb-2 text-amber-500';
+        document.getElementById('resultProgressBar').className = 'h-4 rounded-full transition-all duration-1000 bg-amber-500';
+    } else {
+        msgEl.textContent = 'Tekrar çalışman gerekiyor. Pes etme!';
+        pctEl.className = 'text-5xl font-extrabold mb-2 text-red-500';
+        document.getElementById('resultProgressBar').className = 'h-4 rounded-full transition-all duration-1000 bg-red-500';
+    }
+
+    // Result progress bar width
+    document.getElementById('resultProgressBar').style.width = percentage + '%';
+
+    // Answer review
+    const reviewArea = document.getElementById('answerReview');
+    reviewArea.innerHTML = '';
+    questions.forEach((q, i) => {
+        const row = document.createElement('div');
+        row.className = 'flex items-start gap-3 p-3 rounded-lg ' + (checked[i] ? (isCorrect[i] ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200') : 'bg-gray-100 border border-gray-200');
+
+        const icon = document.createElement('span');
+        icon.className = 'text-lg flex-shrink-0 mt-0.5';
+        if (!checked[i]) {
+            icon.textContent = '⬜';
+        } else if (isCorrect[i]) {
+            icon.textContent = '✅';
+        } else {
+            icon.textContent = '❌';
+        }
+
+        const content = document.createElement('div');
+        content.className = 'flex-1';
+        content.innerHTML = '<span class="font-semibold text-gray-800">Soru ' + q.id + ':</span> ' + q.question;
+
+        if (q.type === 'multiple') {
+            content.innerHTML += '<br><span class="text-xs text-gray-500">Cevabın: ' + (answers[i] !== undefined ? q.options[answers[i]] : 'Cevap verilmedi') + '</span>';
+            content.innerHTML += '<br><span class="text-xs text-green-600">Doğru cevap: ' + q.options[q.correct] + '</span>';
+        } else if (q.type === 'truefalse') {
+            content.innerHTML += '<br><span class="text-xs text-gray-500">Cevabın: ' + (answers[i] !== undefined ? (answers[i] ? 'Doğru' : 'Yanlış') : 'Cevap verilmedi') + '</span>';
+            content.innerHTML += '<br><span class="text-xs text-green-600">Doğru cevap: ' + (q.correct ? 'Doğru' : 'Yanlış') + '</span>';
+        } else if (q.type === 'fillblank') {
+            content.innerHTML += '<br><span class="text-xs text-gray-500">Cevabın: ' + (answers[i] !== undefined ? answers[i] : 'Cevap verilmedi') + '</span>';
+            content.innerHTML += '<br><span class="text-xs text-green-600">Doğru cevap: ' + q.correct + '</span>';
+        }
+
+        row.appendChild(icon);
+        row.appendChild(content);
+        reviewArea.appendChild(row);
+    });
+
+    document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============================================================
+// START
+// ============================================================
+initQuiz();
+</script>
+
+</body>
+</html>

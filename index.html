@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="İslam ERGÜN - DEVNANOTEK">
+  <title>İnternet Programcılığı-I | Öğr. Gör. Merve BABAOĞLU</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Segoe UI', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .topic-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
+    .topic-card.open .topic-content { max-height: 8000px; }
+    .topic-card.open .topic-arrow { transform: rotate(180deg); }
+    .topic-arrow { transition: transform 0.3s ease; }
+    pre { overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+    .scroll-btn { opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+    .scroll-btn.visible { opacity: 1; visibility: visible; }
+    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .mobile-menu.open { max-height: 400px; }
+    .flow-step { position: relative; }
+    .flow-step::after { content: '↓'; position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%); font-size: 1.5rem; color: #6366f1; }
+    .flow-step:last-child::after { content: ''; }
+    .table-compare th:first-child { min-width: 120px; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+  <!-- TOP NAV -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="text-xl font-bold text-indigo-700 flex items-center gap-2">
+          <span class="text-2xl">📘</span> İP-I
+        </a>
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex gap-1">
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-indigo-100 text-indigo-700 font-semibold text-sm">Ana Sayfa</a>
+          <a href="calisma.html" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-semibold text-sm">Çalışma</a>
+          <a href="soru-cevap.html" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-semibold text-sm">Soru-Cevap</a>
+          <a href="test.html" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-semibold text-sm">Test</a>
+        </div>
+        <!-- Mobile hamburger -->
+        <button id="menuBtn" class="md:hidden text-slate-600 p-2 rounded-lg hover:bg-slate-100 text-2xl" aria-label="Menü">☰</button>
+      </div>
+      <!-- Mobile Nav -->
+      <div id="mobileMenu" class="mobile-menu md:hidden pb-2">
+        <a href="index.html" class="block px-4 py-2 rounded-lg bg-indigo-100 text-indigo-700 font-semibold text-sm mb-1">Ana Sayfa</a>
+        <a href="calisma.html" class="block px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-semibold text-sm mb-1">Çalışma</a>
+        <a href="soru-cevap.html" class="block px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-semibold text-sm mb-1">Soru-Cevap</a>
+        <a href="test.html" class="block px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-semibold text-sm">Test</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 text-white py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4">İnternet Programcılığı-I</h1>
+      <p class="text-lg md:text-xl text-indigo-200 mb-2">Final Sınavı Çalışma Notları</p>
+      <p class="text-indigo-300">Öğr. Gör. Merve BABAOĞLU</p>
+      <div class="mt-6 inline-flex items-center gap-2 bg-white/10 rounded-full px-5 py-2 text-sm">
+        <span>📚</span> 16 Konu · PHP &amp; Web Programlama
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK NAV GRID -->
+  <section class="max-w-6xl mx-auto px-4 py-10">
+    <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center">📋 Konu Başlıkları</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3" id="quickNav"></div>
+  </section>
+
+  <!-- TOPICS -->
+  <main class="max-w-4xl mx-auto px-4 pb-20 space-y-5">
+
+    <!-- TOPIC 1 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu1">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-lg">1</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Web Programlamaya Giriş</h3>
+            <p class="text-sm text-slate-500">Web nedir? İstemci-Sunucu mimarisi</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">🌐 Web Nedir?</h4>
+            <p class="text-slate-700">Web: internet üzerinden erişilebilen sayfa ve uygulamaların genel adıdır. Web yapısı <strong>istemci (client)</strong> ve <strong>sunucu (server)</strong> mantığıyla çalışır.</p>
+          </div>
+          <!-- Client-Server Diagram -->
+          <div class="bg-slate-50 rounded-xl p-5 border border-slate-200">
+            <h4 class="font-semibold text-indigo-700 mb-3">📊 İstemci-Sunucu (Client-Server) Mimarisi</h4>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 text-center">
+              <div class="bg-blue-500 text-white rounded-xl px-5 py-3 font-semibold shadow">👤<br>Kullanıcı</div>
+              <div class="text-blue-500 font-bold text-lg">→</div>
+              <div class="bg-indigo-500 text-white rounded-xl px-5 py-3 font-semibold shadow">📤<br>HTTP İsteği</div>
+              <div class="text-blue-500 font-bold text-lg">→</div>
+              <div class="bg-purple-600 text-white rounded-xl px-5 py-3 font-semibold shadow">🖥️<br>Sunucu</div>
+              <div class="text-blue-500 font-bold text-lg">→</div>
+              <div class="bg-indigo-500 text-white rounded-xl px-5 py-3 font-semibold shadow">📥<br>HTTP Yanıtı</div>
+              <div class="text-blue-500 font-bold text-lg">→</div>
+              <div class="bg-blue-500 text-white rounded-xl px-5 py-3 font-semibold shadow">🌍<br>Tarayıcı</div>
+            </div>
+          </div>
+          <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
+            <p class="text-amber-900 font-medium">👩‍🏫 Hoca Örneği:</p>
+            <p class="text-amber-800 text-sm mt-1">Kullanıcı → Tarayıcıdan siteye girer → Sunucu isteği alır → Cevap gönderir</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 2 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu2">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">2</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Frontend ve Backend</h3>
+            <p class="text-sm text-slate-500">Kullanıcı arayüzü vs Sunucu tarafı</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">🎨 Frontend (Ön Yüz)</h4>
+            <p class="text-slate-700">Kullanıcının gördüğü kısımdır, tarayıcıda çalışır. Teknolojiler: <strong>HTML, CSS, JavaScript</strong></p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">⚙️ Backend (Arka Yüz)</h4>
+            <p class="text-slate-700">Sunucuda çalışan kısımdır. Teknolojiler: <strong>PHP, ASP.NET, Java, Python, C#, Node.js</strong></p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">🗄️ Veritabanı (Database)</h4>
+            <p class="text-slate-700"><strong>MySQL, PostgreSQL, MongoDB</strong> gibi veritabanı sistemleri kullanılır.</p>
+          </div>
+          <!-- Comparison Table -->
+          <div class="overflow-x-auto">
+            <table class="table-compare w-full text-sm border-collapse">
+              <thead>
+                <tr class="bg-indigo-600 text-white">
+                  <th class="p-3 text-left rounded-tl-lg">Özellik</th>
+                  <th class="p-3 text-left">Frontend</th>
+                  <th class="p-3 text-left rounded-tr-lg">Backend</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-slate-200"><td class="p-3 font-medium">Görünürlük</td><td class="p-3">Kullanıcıya görünür</td><td class="p-3">Kullanıcıya görünmez</td></tr>
+                <tr class="border-b border-slate-200 bg-slate-50"><td class="p-3 font-medium">Çalışma Yeri</td><td class="p-3">Tarayıcı (Browser)</td><td class="p-3">Sunucu (Server)</td></tr>
+                <tr class="border-b border-slate-200"><td class="p-3 font-medium">Teknolojiler</td><td class="p-3">HTML, CSS, JavaScript</td><td class="p-3">PHP, ASP.NET, Python, Java, Node.js</td></tr>
+                <tr><td class="p-3 font-medium">Odak</td><td class="p-3">Görsel tasarım, kullanıcı deneyimi</td><td class="p-3">Veri işleme, iş mantığı, güvenlik</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 3 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu3">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">3</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">İnternet Terimleri</h3>
+            <p class="text-sm text-slate-500">Temel internet kavramları sözlüğü</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5">
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-800 mb-1">🌍 Internet</h4>
+              <p class="text-sm text-slate-600">TCP/IP tabanlı herkese açık ağ. Dünya çapında bilgisayar ağlarını birbirine bağlar.</p>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-800 mb-1">📡 TCP/IP</h4>
+              <p class="text-sm text-slate-600">Transmission Control Protocol / Internet Protocol. Amerikan Savunma Bakanlığı tarafından hazırlanmıştır.</p>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-800 mb-1">🏢 Intranet</h4>
+              <p class="text-sm text-slate-600">Bir firmanın kendi ağı içindeki iletişim sistemidir. Sadece kurum içi erişime açıktır.</p>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-800 mb-1">🕸️ World Wide Web</h4>
+              <p class="text-sm text-slate-600">Web browser ile görüntülenebilen Internet'in grafiksel yüzüdür.</p>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-800 mb-1">📄 Web Page</h4>
+              <p class="text-sm text-slate-600">Internet üzerinde görüntülenebilen her dosya. HTML ile yazılır.</p>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-800 mb-1">🌐 Web Browser</h4>
+              <p class="text-sm text-slate-600">WWW üzerindeki sayfaları yükleyip görüntüleyen program (Chrome, Firefox, Edge).</p>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-800 mb-1">📁 FTP</h4>
+              <p class="text-sm text-slate-600">File Transfer Protocol. Dosya transfer protokolü. Örnek: <strong>FileZilla</strong> programı.</p>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-800 mb-1">🔗 DNS</h4>
+              <p class="text-sm text-slate-600">Domain Name Server. Alan adı ile IP adresi eşleştirmesini yapar.</p>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-800 mb-1">🖥️ Web Server</h4>
+              <p class="text-sm text-slate-600">HTML sayfalarını tarayıcıya gönderen program (Apache, Nginx, IIS).</p>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-800 mb-1">📍 URL</h4>
+              <p class="text-sm text-slate-600">Internet adreslerinin genel adı. Örnek: <code class="bg-indigo-50 text-indigo-700 px-1 rounded">http://www.artuklu.edu.tr/</code></p>
+            </div>
+          </div>
+          <!-- Alan Adı Uzantıları -->
+          <div class="mt-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-4 border border-indigo-200">
+            <h4 class="font-bold text-indigo-800 mb-2">🏷️ Alan Adı Uzantıları</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm">
+              <span class="bg-white rounded-lg px-3 py-1.5 shadow-sm"><strong>.com</strong> → Commercial (Ticari)</span>
+              <span class="bg-white rounded-lg px-3 py-1.5 shadow-sm"><strong>.gov</strong> → Government (Devlet)</span>
+              <span class="bg-white rounded-lg px-3 py-1.5 shadow-sm"><strong>.org</strong> → Organization (Organizasyon)</span>
+              <span class="bg-white rounded-lg px-3 py-1.5 shadow-sm"><strong>.edu</strong> → Education (Eğitim)</span>
+              <span class="bg-white rounded-lg px-3 py-1.5 shadow-sm"><strong>.net</strong> → Network (Ağ)</span>
+              <span class="bg-white rounded-lg px-3 py-1.5 shadow-sm"><strong>.info</strong> → Information (Bilgi)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 4 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu4">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg">4</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Web Nasıl Çalışır?</h3>
+            <p class="text-sm text-slate-500">Adım adım web sayfası yükleme süreci</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <!-- Flow Diagram -->
+          <div class="space-y-3">
+            <div class="flow-step bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl p-4 text-center font-semibold shadow">1️⃣ Kullanıcı hyperlink'e tıklar</div>
+            <div class="flow-step bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-xl p-4 text-center font-semibold shadow">2️⃣ Browser DNS'e bağlanır, IP adresini alır</div>
+            <div class="flow-step bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl p-4 text-center font-semibold shadow">3️⃣ IP'ye çağrı gönderir, sayfa istenir</div>
+            <div class="flow-step bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-xl p-4 text-center font-semibold shadow">4️⃣ Web Server isteğe cevap verir</div>
+            <div class="flow-step bg-gradient-to-r from-rose-500 to-rose-600 text-white rounded-xl p-4 text-center font-semibold shadow">5️⃣ HTTP üzerinden sayfa tarayıcıya gönderilir</div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+              <h4 class="font-bold text-blue-800">👤 Client (İstemci)</h4>
+              <p class="text-sm text-blue-700 mt-1">İstek yapan taraftır. Web tarayıcısı bir client'tır.</p>
+            </div>
+            <div class="bg-purple-50 rounded-xl p-4 border border-purple-200">
+              <h4 class="font-bold text-purple-800">🖥️ Server (Sunucu)</h4>
+              <p class="text-sm text-purple-700 mt-1">İsteği yanıtlayan taraftır. Web sunucusu sayfaları gönderir.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 5 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu5">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center font-bold text-lg">5</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">PHP'ye Giriş</h3>
+            <p class="text-sm text-slate-500">Hypertext Preprocessor nedir?</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">🐘 PHP Nedir?</h4>
+            <p class="text-slate-700">PHP: <strong>Hypertext Preprocessor</strong>, sunucu taraflı web programlama dilidir. Açık kaynaklı ve ücretsizdir. HTML ile birlikte kullanılabilir. Veritabanı ile kolay entegrasyon sağlar.</p>
+          </div>
+          <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+            <p class="text-red-800 font-bold">⚠️ ÖNEMLİ:</p>
+            <p class="text-red-700 text-sm mt-1">PHP kodları tarayıcıya gönderilmez, sunucuda çalışır! Kullanıcı PHP kaynak kodunu göremez!</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">📋 Kullanım Alanları</h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-violet-100 text-violet-700 px-3 py-1 rounded-full text-sm">Form İşlemleri</span>
+              <span class="bg-violet-100 text-violet-700 px-3 py-1 rounded-full text-sm">Login Sistemleri</span>
+              <span class="bg-violet-100 text-violet-700 px-3 py-1 rounded-full text-sm">Veritabanı İşlemleri</span>
+              <span class="bg-violet-100 text-violet-700 px-3 py-1 rounded-full text-sm">E-ticaret</span>
+              <span class="bg-violet-100 text-violet-700 px-3 py-1 rounded-full text-sm">Blog / CMS</span>
+              <span class="bg-violet-100 text-violet-700 px-3 py-1 rounded-full text-sm">Sosyal Medya</span>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">🌍 PHP Kullanan Büyük Siteler</h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">WordPress</span>
+              <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Facebook</span>
+              <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Wikipedia</span>
+            </div>
+          </div>
+          <!-- PHP Çalışma Akışı -->
+          <div class="bg-slate-50 rounded-xl p-5 border border-slate-200">
+            <h4 class="font-bold text-slate-800 mb-3">⚡ PHP Çalışma Akışı</h4>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 text-center">
+              <div class="bg-blue-500 text-white rounded-xl px-4 py-2 font-semibold shadow text-sm">👤<br>Kullanıcı</div>
+              <div class="text-blue-500 font-bold">→</div>
+              <div class="bg-indigo-500 text-white rounded-xl px-4 py-2 font-semibold shadow text-sm">🌐<br>Web Sunucu<br><span class="text-indigo-200 text-xs">.php'yi tespit eder</span></div>
+              <div class="text-blue-500 font-bold">→</div>
+              <div class="bg-purple-500 text-white rounded-xl px-4 py-2 font-semibold shadow text-sm">🐘<br>PHP Yorumlayıcı<br><span class="text-purple-200 text-xs">kodu çalıştırır</span></div>
+              <div class="text-blue-500 font-bold">→</div>
+              <div class="bg-blue-500 text-white rounded-xl px-4 py-2 font-semibold shadow text-sm">🌍<br>Tarayıcı<br><span class="text-blue-200 text-xs">HTML çıktı görür</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 6 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu6">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center font-bold text-lg">6</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">XAMPP Kurulumu</h3>
+            <p class="text-sm text-slate-500">Yerel web sunucusu kurulumu</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">📦 XAMPP Nedir?</h4>
+            <p class="text-slate-700">Yerel web sunucusu kuran <strong>paket programdır</strong>. Kendi bilgisayarımızda web sunucusu oluşturmamızı sağlar.</p>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+              <h4 class="font-bold text-red-700">🌐 Apache</h4>
+              <p class="text-sm text-red-600">Web Server</p>
+            </div>
+            <div class="bg-violet-50 rounded-xl p-4 border border-violet-200">
+              <h4 class="font-bold text-violet-700">🐘 PHP</h4>
+              <p class="text-sm text-violet-600">Programlama Dili</p>
+            </div>
+            <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+              <h4 class="font-bold text-blue-700">🗄️ MySQL</h4>
+              <p class="text-sm text-blue-600">Veritabanı</p>
+            </div>
+            <div class="bg-teal-50 rounded-xl p-4 border border-teal-200">
+              <h4 class="font-bold text-teal-700">🖥️ phpMyAdmin</h4>
+              <p class="text-sm text-teal-600">Veritabanı Yönetimi</p>
+            </div>
+          </div>
+          <div class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm">
+            <p>📁 PHP dosyaları: <strong>C:\xampp\htdocs</strong> klasörüne kaydedilir</p>
+            <p>🌐 Çalıştırma: <strong>http://localhost/dosyaadi.php</strong></p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 7 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu7">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center font-bold text-lg">7</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">PHP Söz Dizimi</h3>
+            <p class="text-sm text-slate-500">PHP yazım kuralları ve stiller</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">📝 PHP Yazım Stilleri</h4>
+            <div class="space-y-2">
+              <div class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm">
+                <span class="text-slate-400">// XML Stil (tercih edilen) ✅</span><br>
+                <span class="text-purple-400">&lt;?php</span><br>
+                &nbsp;&nbsp;<span class="text-blue-400">echo</span> <span class="text-orange-300">'Merhaba Dünya'</span>;<br>
+                <span class="text-purple-400">?&gt;</span>
+              </div>
+              <div class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm">
+                <span class="text-slate-400">// Kısa Stil</span><br>
+                <span class="text-purple-400">&lt;?</span><br>
+                &nbsp;&nbsp;<span class="text-blue-400">echo</span> <span class="text-orange-300">'Merhaba'</span>;<br>
+                <span class="text-purple-400">?&gt;</span>
+              </div>
+              <div class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm">
+                <span class="text-slate-400">// Script Stil</span><br>
+                <span class="text-purple-400">&lt;script language='php'&gt;</span><br>
+                &nbsp;&nbsp;<span class="text-blue-400">echo</span> <span class="text-orange-300">'Merhaba'</span>;<br>
+                <span class="text-purple-400">&lt;/script&gt;</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">💬 Yorum Satırları</h4>
+            <div class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm">
+              <span class="text-slate-400">// Bu tek satırlık yorumdur</span><br>
+              <span class="text-slate-400">/* Bu çok satırlı</span><br>
+              <span class="text-slate-400">&nbsp;&nbsp;&nbsp;yorumdur */</span>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">▶️ İlk PHP Kodu</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm"><span class="text-purple-400">&lt;?php</span>
+<span class="text-blue-400">echo</span> <span class="text-orange-300">'Merhaba Dünya'</span>;
+<span class="text-purple-400">?&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 8 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu8">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-lime-100 text-lime-700 flex items-center justify-center font-bold text-lg">8</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Değişkenler</h3>
+            <p class="text-sm text-slate-500">PHP'de değişken tanımlama kuralları</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">📌 Değişken Kuralları</h4>
+            <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+              <li>Değişken isminin önüne <strong>$ işareti</strong> konulur</li>
+              <li>Türkçe karakter kullanılmamalıdır (ğ, ü, ş, ı, ö, ç ❌)</li>
+              <li><strong>_</strong> (alt çizgi) ile başlayabilir, rakam ile başlayamaz</li>
+              <li>_ dışında özel işaret kullanılamaz</li>
+              <li><strong>Büyük-küçük harf önemlidir</strong> ($toplam ≠ $Toplam)</li>
+            </ul>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="bg-green-50 rounded-xl p-4 border border-green-200">
+              <h4 class="font-bold text-green-700 mb-2">✅ Doğru Kullanımlar</h4>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-3 font-mono text-xs"><span class="text-purple-400">$deger</span> = 2;
+<span class="text-purple-400">$deger_2</span> = <span class="text-orange-300">"GOP"</span>;
+<span class="text-purple-400">$Deger21</span> = 5.55;
+<span class="text-purple-400">$_sayi</span> = 100;
+<span class="text-purple-400">$userName</span> = <span class="text-orange-300">"Ahmet"</span>;</pre>
+            </div>
+            <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+              <h4 class="font-bold text-red-700 mb-2">❌ Yanlış Kullanımlar</h4>
+              <pre class="bg-slate-800 text-red-400 rounded-lg p-3 font-mono text-xs">$2deger  <span class="text-slate-500">← rakamla başlar</span>
+$deger?  <span class="text-slate-500">← ? kullanılamaz</span>
+$değer   <span class="text-slate-500">← ğ Türkçe karakter</span>
+$1sayi   <span class="text-slate-500">← 1 ile başlar</span>
+$isim%   <span class="text-slate-500">← % kullanılamaz</span>
+$maaş    <span class="text-slate-500">← ş Türkçe karakter</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 9 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu9">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center font-bold text-lg">9</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Veri Tipleri</h3>
+            <p class="text-sm text-slate-500">Integer, Float, String, Array</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+              <h4 class="font-bold text-blue-700">🔢 Integer (Tam Sayı)</h4>
+              <p class="text-sm text-blue-600">Ondalık kısmı olmayan sayılar</p>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-2 font-mono text-xs mt-2">$yi = 2024;
+$yas = 20;
+$sicaklik = -5;</pre>
+            </div>
+            <div class="bg-purple-50 rounded-xl p-4 border border-purple-200">
+              <h4 class="font-bold text-purple-700">🔣 Float / Real (Ondalıklı)</h4>
+              <p class="text-sm text-purple-600">Ondalıklı sayılar, nokta kullanılır</p>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-2 font-mono text-xs mt-2">$fiyat = 49.99;
+$pi = 3.14;</pre>
+            </div>
+            <div class="bg-pink-50 rounded-xl p-4 border border-pink-200">
+              <h4 class="font-bold text-pink-700">📝 String (Metin)</h4>
+              <p class="text-sm text-pink-600">Tek veya çift tırnak içinde</p>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-2 font-mono text-xs mt-2">$isim = "Ahmet";
+$sehir = 'Mardin';</pre>
+            </div>
+            <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
+              <h4 class="font-bold text-amber-700">📊 Array (Dizi)</h4>
+              <p class="text-sm text-amber-600">Birden fazla bilgi tutar</p>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-2 font-mono text-xs mt-2">$gun = array("Pzt","Salı");
+$gun[0] = "Pazartesi";</pre>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">📊 Array (Dizi) Oluşturma</h4>
+            <div class="space-y-3">
+              <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                <h5 class="font-bold text-sm text-slate-700 mb-1">Sayısal İndeksli Dizi</h5>
+                <pre class="bg-slate-800 text-green-300 rounded-lg p-3 font-mono text-xs">$gun = array("Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma");
+// veya
+$gun[0] = "Pazartesi";
+$gun[1] = "Salı";</pre>
+              </div>
+              <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                <h5 class="font-bold text-sm text-slate-700 mb-1">Associative (İlişkisel) Dizi</h5>
+                <pre class="bg-slate-800 text-green-300 rounded-lg p-3 font-mono text-xs">$ogrenci = array(
+  "isim" => "Musa",
+  "yas"  => 18,
+  "il"   => "İstanbul"
+);</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 10 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu10">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-lg">10</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Sabitler</h3>
+            <p class="text-sm text-slate-500">define() ile sabit tanımlama</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">🔒 Sabit Kuralları</h4>
+            <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+              <li><strong>define()</strong> fonksiyonu ile tanımlanır</li>
+              <li>Sabitlerin başında <strong>$ işareti yoktur</strong></li>
+              <li>Bir kez tanımlanır, <strong>değiştirilemez</strong></li>
+              <li>Genellikle <strong>büyük harfle</strong> yazılır</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-1">📌 Örnek Kod</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm"><span class="text-purple-400">&lt;?php</span>
+<span class="text-blue-400">define</span>(<span class="text-orange-300">"SITE_ADI"</span>, <span class="text-orange-300">"Artuklu Üniversitesi"</span>);
+<span class="text-blue-400">echo</span> SITE_ADI; <span class="text-slate-400">// Artuklu Üniversitesi</span>
+<span class="text-purple-400">?&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 11 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu11">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">11</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Operatörler</h3>
+            <p class="text-sm text-slate-500">Aritmetik, karşılaştırma, mantıksal operatörler</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div class="bg-slate-50 rounded-xl p-3 border border-slate-200">
+              <h4 class="font-bold text-indigo-700 text-sm mb-1">📌 Atama</h4>
+              <code class="text-sm">=</code>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-3 border border-slate-200">
+              <h4 class="font-bold text-indigo-700 text-sm mb-1">➕ Aritmetik</h4>
+              <code class="text-sm">+  -  *  /  %</code>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-3 border border-slate-200">
+              <h4 class="font-bold text-indigo-700 text-sm mb-1">🔗 String Birleştirme</h4>
+              <code class="text-sm">. (nokta)</code>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-3 border border-slate-200">
+              <h4 class="font-bold text-indigo-700 text-sm mb-1">⚖️ Karşılaştırma</h4>
+              <code class="text-sm">==  !=  &gt;  &lt;  &gt;=  &lt;=</code>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-3 border border-slate-200">
+              <h4 class="font-bold text-indigo-700 text-sm mb-1">🧠 Mantıksal</h4>
+              <code class="text-sm">&amp;&amp; (AND)  || (OR)  ! (NOT)</code>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-3 border border-slate-200">
+              <h4 class="font-bold text-indigo-700 text-sm mb-1">📈 Artırma/Azaltma</h4>
+              <code class="text-sm">++$a  $a++  --$a  $a--</code>
+            </div>
+          </div>
+          <!-- Hoca örneği -->
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">👩‍🏫 Hoca'nın Örnek Kodu</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm">$sayi1 = 10;
+$sayi2 = 3;
+
+<span class="text-blue-400">echo</span> <span class="text-orange-300">"Toplam: "</span> . ($sayi1 + $sayi2); <span class="text-slate-400">// 13</span>
+<span class="text-blue-400">echo</span> <span class="text-orange-300">"Fark: "</span> . ($sayi1 - $sayi2);   <span class="text-slate-400">// 7</span>
+<span class="text-blue-400">echo</span> <span class="text-orange-300">"Çarpım: "</span> . ($sayi1 * $sayi2);  <span class="text-slate-400">// 30</span>
+<span class="text-blue-400">echo</span> <span class="text-orange-300">"Bölüm: "</span> . ($sayi1 / $sayi2);   <span class="text-slate-400">// 3.333</span>
+<span class="text-blue-400">echo</span> <span class="text-orange-300">"Kalan: "</span> . ($sayi1 % $sayi2);    <span class="text-slate-400">// 1</span></pre>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">🔗 String Birleştirme (.)</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm">$sehir = <span class="text-orange-300">"Ankara"</span>;
+$bilgi = <span class="text-orange-300">"Başkentimiz"</span>;
+
+$sonuc  = $sehir . $bilgi;    <span class="text-slate-400">// AnkaraBaşkentimiz</span>
+$sonuc2 = $sehir . <span class="text-orange-300">" "</span> . $bilgi; <span class="text-slate-400">// Ankara Başkentimiz</span></pre>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">❓ Ternary Operatör</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm">$buyuk = ($a > $b) ? $a : $b;
+// $a büyükse $a'yı, değilse $b'yi ata</pre>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 12 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu12">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-yellow-100 text-yellow-700 flex items-center justify-center font-bold text-lg">12</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Koşul Yapıları</h3>
+            <p class="text-sm text-slate-500">if-else, switch-case, karar yapıları</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">🔀 if / if-else / if-elseif-else</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm"><span class="text-slate-400">// Kullanıcı giriş kontrolü</span>
+<span class="text-blue-400">if</span> ($kullanici == <span class="text-orange-300">"admin"</span> &amp;&amp; $sifre == <span class="text-orange-300">"1234"</span>) {
+    <span class="text-blue-400">echo</span> <span class="text-orange-300">"Giriş başarılı"</span>;
+} <span class="text-blue-400">else</span> {
+    <span class="text-blue-400">echo</span> <span class="text-orange-300">"Hatalı giriş"</span>;
+}
+
+<span class="text-slate-400">// İndirim sistemi</span>
+<span class="text-blue-400">if</span> ($tutar &lt;= 100) {
+    <span class="text-blue-400">echo</span> <span class="text-orange-300">"İndirim yok"</span>;
+} <span class="text-blue-400">elseif</span> ($tutar &lt;= 200) {
+    <span class="text-blue-400">echo</span> <span class="text-orange-300">"%10 indirim"</span>;
+} <span class="text-blue-400">else</span> {
+    <span class="text-blue-400">echo</span> <span class="text-orange-300">"%20 indirim"</span>;
+}</pre>
+          </div>
+          <!-- Sıcaklık Ternary -->
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">🌡️ Sıcaklık Örneği (Ternary)</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm">$durum = ($sicaklik &lt;= 10) ? <span class="text-orange-300">"SOĞUK"</span>
+       : (($sicaklik &lt;= 20) ? <span class="text-orange-300">"ILIK"</span> : <span class="text-orange-300">"SICAK"</span>);</pre>
+          </div>
+          <!-- Switch - Mevsim -->
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">📅 switch-case: Mevsim Bulma</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm"><span class="text-blue-400">switch</span> ($ay) {
+    <span class="text-blue-400">case</span> 12:
+    <span class="text-blue-400">case</span> 1:
+    <span class="text-blue-400">case</span> 2:  <span class="text-blue-400">echo</span> <span class="text-orange-300">"Kış"</span>; <span class="text-blue-400">break</span>;
+    <span class="text-blue-400">case</span> 3:
+    <span class="text-blue-400">case</span> 4:
+    <span class="text-blue-400">case</span> 5:  <span class="text-blue-400">echo</span> <span class="text-orange-300">"İlkbahar"</span>; <span class="text-blue-400">break</span>;
+    <span class="text-blue-400">case</span> 6:
+    <span class="text-blue-400">case</span> 7:
+    <span class="text-blue-400">case</span> 8:  <span class="text-blue-400">echo</span> <span class="text-orange-300">"Yaz"</span>; <span class="text-blue-400">break</span>;
+    <span class="text-blue-400">case</span> 9:
+    <span class="text-blue-400">case</span> 10:
+    <span class="text-blue-400">case</span> 11: <span class="text-blue-400">echo</span> <span class="text-orange-300">"Sonbahar"</span>; <span class="text-blue-400">break</span>;
+}</pre>
+          </div>
+          <!-- Not hesaplama -->
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">📊 Not Hesaplama Sistemi</h4>
+            <p class="text-sm text-slate-600 mb-2">Vize %40 + Final %60 ile 100'lük not hesaplanır, sonra 5'lik sisteme çevrilir.</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-indigo-600 text-white">
+                    <th class="p-2 text-left rounded-tl-lg">100'lük Puan</th>
+                    <th class="p-2 text-left">5'lik Not</th>
+                    <th class="p-2 text-left rounded-tr-lg">Derece</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-slate-200"><td class="p-2">85 - 100</td><td class="p-2 font-bold">5</td><td class="p-2 text-green-600 font-semibold">PEKİYİ</td></tr>
+                  <tr class="border-b border-slate-200 bg-slate-50"><td class="p-2">70 - 84</td><td class="p-2 font-bold">4</td><td class="p-2 text-blue-600 font-semibold">İYİ</td></tr>
+                  <tr class="border-b border-slate-200"><td class="p-2">55 - 69</td><td class="p-2 font-bold">3</td><td class="p-2 text-amber-600 font-semibold">ORTA</td></tr>
+                  <tr class="border-b border-slate-200 bg-slate-50"><td class="p-2">45 - 54</td><td class="p-2 font-bold">2</td><td class="p-2 text-orange-600 font-semibold">GEÇER</td></tr>
+                  <tr class="border-b border-slate-200"><td class="p-2">25 - 44</td><td class="p-2 font-bold">1</td><td class="p-2 text-red-500 font-semibold">ZAYIF</td></tr>
+                  <tr><td class="p-2">0 - 24</td><td class="p-2 font-bold">0</td><td class="p-2 text-red-700 font-semibold">SIFIR</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+            <p class="text-red-800 font-bold">⚠️ ÖNEMLİ:</p>
+            <ul class="text-red-700 text-sm mt-1 list-disc list-inside space-y-1">
+              <li>switch ile yapılan her şey if ile yapılabilir ama <strong>if ile yapılan her şey switch ile yapılamaz!</strong></li>
+              <li><strong>break unutulursa fall-through olur!</strong> Bir sonraki case de çalışır.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 13 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu13">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-fuchsia-100 text-fuchsia-700 flex items-center justify-center font-bold text-lg">13</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Döngüler</h3>
+            <p class="text-sm text-slate-500">for, while, break, continue</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <!-- for -->
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">🔁 for Döngüsü</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm"><span class="text-slate-400">// 1'den 10'a toplam</span>
+$toplam = 0;
+<span class="text-blue-400">for</span> ($i = 1; $i &lt;= 10; $i++) {
+    $toplam += $i;
+}
+<span class="text-blue-400">echo</span> $toplam; <span class="text-slate-400">// 55</span></pre>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-700 mb-1">🔢 1-100 Arası 5'e Bölünebilenlerin Toplamı</h4>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-3 font-mono text-xs">$toplam = 0;
+for($i=1; $i&lt;=100; $i++) {
+  if($i % 5 == 0) $toplam+=$i;
+}
+echo $toplam; // 1050</pre>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+              <h4 class="font-bold text-slate-700 mb-1">✖️ Faktöriyel Hesaplama</h4>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-3 font-mono text-xs">$faktoryel = 1;
+for($i=1; $i&lt;=$sayi; $i++) {
+  $faktoryel *= $i;
+}</pre>
+            </div>
+          </div>
+          <!-- while -->
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">🔄 while Döngüsü</h4>
+            <p class="text-sm text-slate-600 mb-2">Koşul doğru olduğu sürece çalışır.</p>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm">$i = 1;
+<span class="text-blue-400">while</span> ($i &lt;= 10) {
+    <span class="text-blue-400">echo</span> $i . <span class="text-orange-300">" "</span>;
+    $i++;
+}</pre>
+          </div>
+          <!-- break / continue -->
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+              <h4 class="font-bold text-red-700">🛑 break</h4>
+              <p class="text-sm text-red-600">Döngüden tamamen çıkar.</p>
+            </div>
+            <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
+              <h4 class="font-bold text-amber-700">⏭️ continue</h4>
+              <p class="text-sm text-amber-600">O anki adımı atlar, döngü devam eder.</p>
+            </div>
+          </div>
+          <!-- header() -->
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">↪️ header() Yönlendirme</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm"><span class="text-slate-400">// Sayfa yönlendirme</span>
+<span class="text-blue-400">header</span>(<span class="text-orange-300">"Location: anasayfa.php"</span>);
+
+<span class="text-slate-400">// 3 saniye sonra yönlendirme</span>
+<span class="text-blue-400">header</span>(<span class="text-orange-300">"Refresh: 3; url=anasayfa.php"</span>);</pre>
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg mt-3">
+              <p class="text-red-800 font-bold">⚠️ ÖNEMLİ:</p>
+              <p class="text-red-700 text-sm mt-1"><strong>header()</strong> fonksiyonu ekrana çıktıdan <strong>ÖNCE</strong> çağrılmalıdır! Aksi halde hata verir.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 14 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu14">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-lg">14</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Diziler (Array)</h3>
+            <p class="text-sm text-slate-500">Array oluşturma, sıralama, fonksiyonlar</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">📦 Dizi Oluşturma Yöntemleri</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm"><span class="text-slate-400">// Yöntem 1: array()</span>
+$meyveler = array(<span class="text-orange-300">"Elma"</span>, <span class="text-orange-300">"Armut"</span>, <span class="text-orange-300">"Muz"</span>);
+
+<span class="text-slate-400">// Yöntem 2: [] (kısa dizi söz dizimi)</span>
+$meyveler = [<span class="text-orange-300">"Elma"</span>, <span class="text-orange-300">"Armut"</span>, <span class="text-orange-300">"Muz"</span>];
+
+<span class="text-slate-400">// Yöntem 3: Tek tek atama</span>
+$meyveler[0] = <span class="text-orange-300">"Elma"</span>;
+$meyveler[1] = <span class="text-orange-300">"Armut"</span>;
+$meyveler[2] = <span class="text-orange-300">"Muz"</span>;</pre>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">✏️ Eleman Değiştirme</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm">$meyveler[0] = <span class="text-orange-300">"Portakal"</span>;  <span class="text-slate-400">// Elma → Portakal</span></pre>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="bg-green-50 rounded-xl p-4 border border-green-200">
+              <h4 class="font-bold text-green-700">📈 sort()</h4>
+              <p class="text-sm text-green-600">Küçükten büyüğe sıralar</p>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-2 font-mono text-xs mt-1">sort($dizi);</pre>
+            </div>
+            <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+              <h4 class="font-bold text-red-700">📉 rsort()</h4>
+              <p class="text-sm text-red-600">Büyükten küçüğe sıralar</p>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-2 font-mono text-xs mt-1">rsort($dizi);</pre>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">🔧 Dizi Fonksiyonları</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm">
+              <span class="bg-indigo-50 rounded-lg px-3 py-2 text-center font-mono">count()</span>
+              <span class="bg-indigo-50 rounded-lg px-3 py-2 text-center font-mono">max()</span>
+              <span class="bg-indigo-50 rounded-lg px-3 py-2 text-center font-mono">min()</span>
+              <span class="bg-indigo-50 rounded-lg px-3 py-2 text-center font-mono">sort()</span>
+              <span class="bg-indigo-50 rounded-lg px-3 py-2 text-center font-mono">rsort()</span>
+              <span class="bg-indigo-50 rounded-lg px-3 py-2 text-center font-mono">in_array()</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 15 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu15">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">15</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Fonksiyonlar</h3>
+            <p class="text-sm text-slate-500">function, parametre, require/include</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">🔧 Basit Fonksiyon</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm"><span class="text-blue-400">function</span> selamVer() {
+    <span class="text-blue-400">echo</span> <span class="text-orange-300">"Merhaba"</span>;
+ }
+ selamVer(); <span class="text-slate-400">// Merhaba</span></pre>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">📥 Parametreli Fonksiyon</h4>
+            <pre class="bg-slate-800 text-green-300 rounded-xl p-4 font-mono text-sm"><span class="text-blue-400">function</span> topla($a, $b) {
+    <span class="text-blue-400">return</span> $a + $b;
+}
+<span class="text-blue-400">echo</span> topla(5, 3); <span class="text-slate-400">// 8</span></pre>
+          </div>
+          <div>
+            <h4 class="font-semibold text-indigo-700 mb-2">📂 Dosya Dahil Etme</h4>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+                <h4 class="font-bold text-red-700">require</h4>
+                <pre class="bg-slate-800 text-green-300 rounded-lg p-2 font-mono text-xs mt-1">require "dosya.php";</pre>
+                <p class="text-sm text-red-600 mt-1">Bulamazsa <strong>fatal error</strong> verir, script durur!</p>
+              </div>
+              <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
+                <h4 class="font-bold text-amber-700">include</h4>
+                <pre class="bg-slate-800 text-green-300 rounded-lg p-2 font-mono text-xs mt-1">include "dosya.php";</pre>
+                <p class="text-sm text-amber-600 mt-1">Bulamazsa <strong>warning</strong> verir, script devam eder.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TOPIC 16 -->
+    <article class="topic-card bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden" id="konu16">
+      <button class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition" onclick="toggleTopic(this)">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center font-bold text-lg">16</span>
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Diğer Fonksiyonlar</h3>
+            <p class="text-sm text-slate-500">isset, empty, header</p>
+          </div>
+        </div>
+        <span class="topic-arrow text-2xl text-slate-400">▼</span>
+      </button>
+      <div class="topic-content">
+        <div class="px-5 pb-5 space-y-4">
+          <div class="grid sm:grid-cols-3 gap-3">
+            <div class="bg-green-50 rounded-xl p-4 border border-green-200">
+              <h4 class="font-bold text-green-700">🔍 isset()</h4>
+              <p class="text-sm text-green-600">Değişken tanımlı ve null değil mi?</p>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-2 font-mono text-xs mt-2">if(isset($degisken)) { ... }</pre>
+            </div>
+            <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+              <h4 class="font-bold text-red-700">🫙 empty()</h4>
+              <p class="text-sm text-red-600">Değişken boş mu?</p>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-2 font-mono text-xs mt-2">if(empty($degisken)) { ... }</pre>
+            </div>
+            <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+              <h4 class="font-bold text-blue-700">↪️ header()</h4>
+              <p class="text-sm text-blue-600">Sayfa yönlendirme</p>
+              <pre class="bg-slate-800 text-green-300 rounded-lg p-2 font-mono text-xs mt-2">header("Location: x.php");</pre>
+            </div>
+          </div>
+          <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
+            <p class="text-amber-900 font-medium">💡 Özet:</p>
+            <p class="text-amber-800 text-sm mt-1"><strong>isset()</strong> → değişken var mı? | <strong>empty()</strong> → değişken boş mu? | <strong>header()</strong> → sayfayı yönlendir. header() ekrana bir şey yazdırmadan önce kullanılmalıdır!</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- SCROLL TO TOP -->
+  <button id="scrollTopBtn" class="scroll-btn fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-700 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-xl z-40" onclick="scrollToTop()" title="Başa dön">↑</button>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-800 text-slate-400 py-8 text-center text-sm">
+    <div class="max-w-4xl mx-auto px-4">
+      <p class="font-bold text-white text-lg mb-1">İnternet Programcılığı-I</p>
+      <p>Öğr. Gör. Merve BABAOĞLU</p>
+      <p class="mt-3">2025-2026 Dönemi Final Sınavı Çalışma Notları &copy; 2026</p>
+      <p class="mt-1 text-slate-500 text-xs">Hazırlayan: <span class="text-slate-300">İslam ERGÜN - DEVNANOTEK</span></p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('menuBtn').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+      this.textContent = this.textContent === '☰' ? '✕' : '☰';
+    });
+
+    // Collapsible topic cards
+    function toggleTopic(btn) {
+      btn.closest('.topic-card').classList.toggle('open');
+    }
+
+    // Open topic by hash
+    function openTopic(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.classList.add('open');
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Scroll to top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Show/hide scroll button
+    var scrollBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) {
+        scrollBtn.classList.add('visible');
+      } else {
+        scrollBtn.classList.remove('visible');
+      }
+    });
+
+    // Generate quick nav grid
+    (function() {
+      var topics = [
+        { num: 1, title: 'Web Programlamaya Giriş', id: 'konu1' },
+        { num: 2, title: 'Frontend ve Backend', id: 'konu2' },
+        { num: 3, title: 'İnternet Terimleri', id: 'konu3' },
+        { num: 4, title: 'Web Nasıl Çalışır?', id: 'konu4' },
+        { num: 5, title: "PHP'ye Giriş", id: 'konu5' },
+        { num: 6, title: 'XAMPP Kurulumu', id: 'konu6' },
+        { num: 7, title: 'PHP Söz Dizimi', id: 'konu7' },
+        { num: 8, title: 'Değişkenler', id: 'konu8' },
+        { num: 9, title: 'Veri Tipleri', id: 'konu9' },
+        { num: 10, title: 'Sabitler', id: 'konu10' },
+        { num: 11, title: 'Operatörler', id: 'konu11' },
+        { num: 12, title: 'Koşul Yapıları', id: 'konu12' },
+        { num: 13, title: 'Döngüler', id: 'konu13' },
+        { num: 14, title: 'Diziler (Array)', id: 'konu14' },
+        { num: 15, title: 'Fonksiyonlar', id: 'konu15' },
+        { num: 16, title: 'Diğer Fonksiyonlar', id: 'konu16' }
+      ];
+      var nav = document.getElementById('quickNav');
+      var html = '';
+      topics.forEach(function(t) {
+        html += '<a href="javascript:void(0)" onclick="openTopic(\'' + t.id + '\')" class="bg-white hover:bg-indigo-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 hover:text-indigo-700 transition text-center shadow-sm">' + t.num + '. ' + t.title + '</a>';
+      });
+      nav.innerHTML = html;
+    })();
+
+    // Open topic if URL has hash
+    if (window.location.hash) {
+      var id = window.location.hash.substring(1);
+      setTimeout(function() { openTopic(id); }, 300);
+    }
+  </script>
+</body>
+</html>

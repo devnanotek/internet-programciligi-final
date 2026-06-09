@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="İslam ERGÜN - DEVNANOTEK">
+    <title>PHP Çalışma Sayfası | İnternet Programcılığı-I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-down': 'slideDown 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideDown: { '0%': { opacity: '0', transform: 'translateY(-10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen font-sans antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">💻</span>
+                    <div>
+                        <h1 class="text-lg font-bold text-slate-800 leading-tight">İnternet Programcılığı-I</h1>
+                        <p class="text-xs text-slate-500 -mt-0.5">Öğr. Gör. Merve BABAOĞLU</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-1">
+                    <a href="index.html" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-800 transition-colors font-medium text-sm">🏠 Ana Sayfa</a>
+                    <a href="calisma.html" class="px-4 py-2 rounded-lg bg-emerald-600 text-white font-medium text-sm shadow-md">📝 Çalışma</a>
+                    <a href="soru-cevap.html" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-800 transition-colors font-medium text-sm">❓ Soru-Cevap</a>
+                    <a href="test.html" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-800 transition-colors font-medium text-sm">📋 Test</a>
+                </div>
+                <!-- Mobile menu button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="md:hidden hidden pb-3 space-y-1">
+                <a href="index.html" class="block px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors font-medium text-sm">🏠 Ana Sayfa</a>
+                <a href="calisma.html" class="block px-4 py-2 rounded-lg bg-emerald-600 text-white font-medium text-sm">📝 Çalışma</a>
+                <a href="soru-cevap.html" class="block px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors font-medium text-sm">❓ Soru-Cevap</a>
+                <a href="test.html" class="block px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors font-medium text-sm">📋 Test</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+            <div class="text-center">
+                <span class="text-4xl md:text-5xl mb-4 block">📝</span>
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">PHP Çalışma Sayfası</h2>
+                <p class="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+                    Bu sayfada PHP derslerinde öğrendiğimiz tüm konuları pekiştirmek için 
+                    örnek kodlar, alıştırmalar ve açıklamalar bulacaksınız. Her örneğin 
+                    çıktısını görebilir, kodu inceleyebilirsiniz.
+                </p>
+                <div class="flex flex-wrap justify-center gap-3 mt-6">
+                    <span class="px-3 py-1 bg-white/20 rounded-full text-sm backdrop-blur-sm">💡 8 Ana Bölüm</span>
+                    <span class="px-3 py-1 bg-white/20 rounded-full text-sm backdrop-blur-sm">⚡ 20+ Kod Örneği</span>
+                    <span class="px-3 py-1 bg-white/20 rounded-full text-sm backdrop-blur-sm">📝 Açıklamalı Çözümler</span>
+                </div>
+            </div>
+        </div>
+        <div class="relative h-8">
+            <svg class="absolute bottom-0 w-full h-8 text-slate-50" viewBox="0 0 1440 40" preserveAspectRatio="none"><path fill="currentColor" d="M0,20 C360,40 1080,0 1440,20 L1440,40 L0,40 Z"/></svg>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+
+        <!-- ==================== SECTION 1: Temel PHP Örnekleri ==================== -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-2xl">💻</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Temel PHP Örnekleri</h2>
+            </div>
+            <p class="text-slate-600 mb-6 ml-10">PHP'nin temel sözdizimi ve ilk kod örnekleri ile başlayalım.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- Merhaba Dünya -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">🌍 Merhaba Dünya</h3>
+                        <p class="text-xs text-slate-400 mb-4">PHP'de ilk çıktı örneği</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span>
+                            <span class="text-green-400"> echo </span>
+                            <span class="text-orange-300">"Merhaba Dünya"</span>
+                            <span class="text-blue-400">; ?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> PHP'de ekrana yazdırmak için <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">echo</code> komutu kullanılır. PHP kodları <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">&lt;?php ... ?&gt;</code> etiketleri arasına yazılır.
+                        </div>
+                        <div id="output-1" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> Merhaba Dünya
+                        </div>
+                        <button onclick="toggleOutput('output-1', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Değişken Kullanımı -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">📦 Değişken Kullanımı</h3>
+                        <p class="text-xs text-slate-400 mb-4">Değişken tanımlama ve string birleştirme</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$isim</span> = <span class="text-orange-300">"Merve"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$soyisim</span> = <span class="text-orange-300">"Babaoğlu"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">"Hocamız: "</span> . <span class="text-purple-400">$isim</span> . <span class="text-orange-300">" "</span> . <span class="text-purple-400">$soyisim</span>;<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> Değişkenler <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">$</code> işareti ile başlar. String birleştirme için nokta (<code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">.</code>) operatörü kullanılır.
+                        </div>
+                        <div id="output-2" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> Hocamız: Merve Babaoğlu
+                        </div>
+                        <button onclick="toggleOutput('output-2', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 2: Değişkenler ve Veri Tipleri ==================== -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-2xl">📦</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Değişkenler ve Veri Tipleri</h2>
+            </div>
+            <p class="text-slate-600 mb-6 ml-10">PHP'de farklı veri tiplerini tanıma ve tür dönüşümlerini öğrenme.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- Farklı Veri Tipleri -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">🔬 Farklı Veri Tipleri</h3>
+                        <p class="text-xs text-slate-400 mb-4">gettype() fonksiyonu ile tip kontrolü</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$yas</span> = <span class="text-orange-300">20</span>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// integer</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$fiyat</span> = <span class="text-orange-300">49.99</span>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// float</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$isim</span> = <span class="text-orange-300">"Ahmet"</span>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// string</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$aktif</span> = <span class="text-orange-300">true</span>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// boolean</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$dizi</span> = [<span class="text-orange-300">1</span>,<span class="text-orange-300">2</span>,<span class="text-orange-300">3</span>];&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// array</span><br><br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">gettype</span>(<span class="text-purple-400">$yas</span>).<span class="text-orange-300">"&lt;br&gt;"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">gettype</span>(<span class="text-purple-400">$fiyat</span>).<span class="text-orange-300">"&lt;br&gt;"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">gettype</span>(<span class="text-purple-400">$isim</span>).<span class="text-orange-300">"&lt;br&gt;"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">gettype</span>(<span class="text-purple-400">$aktif</span>);<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">gettype()</code> fonksiyonu değişkenin veri tipini döndürür. PHP temel veri tipleri: integer, double (float), string, boolean, array.
+                        </div>
+                        <div id="output-3" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> integer<br>double<br>string<br>boolean
+                        </div>
+                        <button onclick="toggleOutput('output-3', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tür Dönüşümü -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">🔄 Tür Dönüşümü</h3>
+                        <p class="text-xs text-slate-400 mb-4">settype() ile tip değiştirme</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$sayi</span> = <span class="text-orange-300">"100"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">gettype</span>(<span class="text-purple-400">$sayi</span>).<span class="text-orange-300">" → string&lt;br&gt;"</span>;<br><br>
+                            &nbsp;&nbsp;<span class="text-cyan-400">settype</span>(<span class="text-purple-400">$sayi</span>, <span class="text-orange-300">"integer"</span>);<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">gettype</span>(<span class="text-purple-400">$sayi</span>).<span class="text-orange-300">" → integer&lt;br&gt;"</span>;<br><br>
+                            &nbsp;&nbsp;<span class="text-green-400">var_dump</span>(<span class="text-cyan-400">is_int</span>(<span class="text-purple-400">$sayi</span>));<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">settype($degisken, "tip")</code> fonksiyonu değişkenin tipini değiştirir. <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">is_int()</code> ile tip kontrolü yapılabilir.
+                        </div>
+                        <div id="output-4" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> integer<br>bool(true)
+                        </div>
+                        <button onclick="toggleOutput('output-4', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 3: Operatör Uygulamaları ==================== -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-2xl">⚡</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Operatör Uygulamaları</h2>
+            </div>
+            <p class="text-slate-600 mb-6 ml-10">Aritmetik, string ve artırma operatörleri ile ilgili alıştırmalar.</p>
+
+            <!-- Collapsible: Aritmetik Operatörler -->
+            <div class="mb-6 bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <button onclick="toggleCollapse('collapse-aritmetik', this)" class="w-full p-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">🔢 Aritmetik Operatörler - Alıştırma</h3>
+                        <p class="text-xs text-slate-400">Temel matematiksel işlemler</p>
+                    </div>
+                    <span class="chevron text-slate-400 text-xl transition-transform">▼</span>
+                </button>
+                <div id="collapse-aritmetik" class="hidden">
+                    <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$a</span> = <span class="text-orange-300">5</span>;<br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$b</span> = <span class="text-orange-300">3</span>;<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">"($a * $b) / 5 = "</span> . (<span class="text-purple-400">$a</span> * <span class="text-purple-400">$b</span>) / <span class="text-orange-300">5</span>;<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> Parantez içi önce işlenir: (5×3)=15, sonra 15/5=<strong>3</strong>. İşlem önceliği: Parantez → Çarpma/Bölme → Toplama/Çıkarma.
+                        </div>
+                        <div id="output-5" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> (5 * 3) / 5 = 3
+                        </div>
+                        <button onclick="toggleOutput('output-5', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- String Birleştirme -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">🔗 String Birleştirme</h3>
+                        <p class="text-xs text-slate-400 mb-4">Nokta (.) operatörü ile birleştirme</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$isim</span> = <span class="text-orange-300">"Musa"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$mesaj</span> = <span class="text-orange-300">'Selam '</span> . <span class="text-purple-400">$isim</span>;<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-purple-400">$mesaj</span>;<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> String birleştirmede <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">.</code> (nokta) operatörü kullanılır. Tek tırnak (<code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">'</code>) veya çift tırnak (<code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">"</code>) ile string tanımlanabilir.
+                        </div>
+                        <div id="output-6" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> Selam Musa
+                        </div>
+                        <button onclick="toggleOutput('output-6', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Artırma Operatörleri Farkı -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">➕ Artırma Operatörleri Farkı</h3>
+                        <p class="text-xs text-slate-400 mb-4">++$a vs $a++ arasındaki kritik fark</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$a</span> = <span class="text-orange-300">5</span>;<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">"++$a = "</span> . ++<span class="text-purple-400">$a</span>;&nbsp;&nbsp;<span class="text-slate-500">// önce artırır, sonra yazdırır</span><br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">" → "</span> . <span class="text-purple-400">$a</span>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// $a şimdi 6</span><br><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$b</span> = <span class="text-orange-300">5</span>;<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">"$b++ = "</span> . <span class="text-purple-400">$b</span>++;&nbsp;&nbsp;<span class="text-slate-500">// önce yazdırır, sonra artırır → 5</span><br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">" → "</span> . <span class="text-purple-400">$b</span>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// $b şimdi 6</span><br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">++$a</code> önce artırıp sonra kullanır (6 yazar). <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">$a++</code> önce kullanıp sonra artırır (5 yazar, sonra 6 olur).
+                        </div>
+                        <div id="output-7" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> ++$a = 6 (önce artırır) → $a=6<br>$b++ = 5 (sonra artırır) → $b=6
+                        </div>
+                        <button onclick="toggleOutput('output-7', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 4: Koşul Yapıları Alıştırmaları ==================== -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-2xl">🔀</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Koşul Yapıları Alıştırmaları</h2>
+            </div>
+            <p class="text-slate-600 mb-6 ml-10">if-else, switch-case ve ternary operatörü ile koşullu işlemler.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- Sıcaklık Durumu (Ternary) -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">🌡️ Sıcaklık Durumu (Ternary)</h3>
+                        <p class="text-xs text-slate-400 mb-4">İç içe ternary operatör kullanımı</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$sicaklik</span> = <span class="text-orange-300">15</span>;<br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$durum</span> = (<span class="text-purple-400">$sicaklik</span> <= <span class="text-orange-300">10</span>) ? <span class="text-orange-300">"SOĞUK"</span> : ((<span class="text-purple-400">$sicaklik</span> <= <span class="text-orange-300">20</span>) ? <span class="text-orange-300">"ILIK"</span> : <span class="text-orange-300">"SICAK"</span>);<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-purple-400">$durum</span>;<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> Ternary operatör <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">(koşul) ? doğru : yanlış</code> şeklinde çalışır. 15 ≤ 10 yanlış → 15 ≤ 20 doğru → <strong>"ILIK"</strong>.
+                        </div>
+                        <div id="output-8" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> ILIK
+                        </div>
+                        <button onclick="toggleOutput('output-8', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Kullanıcı Giriş Kontrolü -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">🔐 Kullanıcı Giriş Kontrolü</h3>
+                        <p class="text-xs text-slate-400 mb-4">if-else ile basit giriş doğrulama</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$kullanici</span> = <span class="text-orange-300">"admin"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$sifre</span> = <span class="text-orange-300">"1234"</span>;<br><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$gKullanici</span> = <span class="text-orange-300">"admin"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$gSifre</span> = <span class="text-orange-300">"1234"</span>;<br><br>
+                            &nbsp;&nbsp;<span class="text-pink-400">if</span> (<span class="text-purple-400">$gKullanici</span> == <span class="text-purple-400">$kullanici</span> && <span class="text-purple-400">$gSifre</span> == <span class="text-purple-400">$sifre</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">"Giriş başarılı! Hoş geldiniz."</span>;<br>
+                            &nbsp;&nbsp;} <span class="text-pink-400">else</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">"Kullanıcı adı veya şifre hatalı!"</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">&&</code> (AND) operatörü ile iki koşulun da doğru olması kontrol edilir. admin/1234 eşleştiği için başarılı sonuç döner.
+                        </div>
+                        <div id="output-9" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> Giriş başarılı! Hoş geldiniz.
+                        </div>
+                        <button onclick="toggleOutput('output-9', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Collapsible: İndirim Sistemi -->
+            <div class="mt-6 bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <button onclick="toggleCollapse('collapse-indirim', this)" class="w-full p-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">🛒 İndirim Sistemi (if-elseif-else)</h3>
+                        <p class="text-xs text-slate-400">Alışveriş tutarına göre kademeli indirim hesaplama</p>
+                    </div>
+                    <span class="chevron text-slate-400 text-xl transition-transform">▼</span>
+                </button>
+                <div id="collapse-indirim" class="hidden">
+                    <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$tutar</span> = <span class="text-orange-300">250</span>;<br><br>
+                            &nbsp;&nbsp;<span class="text-pink-400">if</span> (<span class="text-purple-400">$tutar</span> < <span class="text-orange-300">100</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">"İndirim yok, ödenecek: "</span> . <span class="text-purple-400">$tutar</span> . <span class="text-orange-300">" TL"</span>;<br>
+                            &nbsp;&nbsp;} <span class="text-pink-400">elseif</span> (<span class="text-purple-400">$tutar</span> <= <span class="text-orange-300">250</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">$indirim</span> = <span class="text-purple-400">$tutar</span> * <span class="text-orange-300">0.20</span>;&nbsp;&nbsp;<span class="text-slate-500">// %20 indirim</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">"%20 indirim! Ödenecek: "</span> . (<span class="text-purple-400">$tutar</span> - <span class="text-purple-400">$indirim</span>) . <span class="text-orange-300">" TL"</span>;<br>
+                            &nbsp;&nbsp;} <span class="text-pink-400">else</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">$indirim</span> = <span class="text-purple-400">$tutar</span> * <span class="text-orange-300">0.30</span>;&nbsp;&nbsp;<span class="text-slate-500">// %30 indirim</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">"%30 indirim! Ödenecek: "</span> . (<span class="text-purple-400">$tutar</span> - <span class="text-purple-400">$indirim</span>) . <span class="text-orange-300">" TL"</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> if-elseif-else yapısı ile çoklu koşul kontrolü. $tutar=250 için: 100 < 250 ≤ 250 → <strong>%20 indirim</strong> → 250 - 50 = 200 TL ödenir.
+                        </div>
+                        <div id="output-10" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> %20 indirim! Ödenecek: 200 TL
+                        </div>
+                        <button onclick="toggleOutput('output-10', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Not Hesaplama -->
+            <div class="mt-6 bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <button onclick="toggleCollapse('collapse-not', this)" class="w-full p-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">📊 Not Hesaplama (switch-case)</h3>
+                        <p class="text-xs text-slate-400">100'lük notu 5'lik sisteme çevirme</p>
+                    </div>
+                    <span class="chevron text-slate-400 text-xl transition-transform">▼</span>
+                </button>
+                <div id="collapse-not" class="hidden">
+                    <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$not</span> = <span class="text-orange-300">72</span>;<br><br>
+                            &nbsp;&nbsp;<span class="text-pink-400">switch</span> (<span class="text-orange-300">true</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">case</span> (<span class="text-purple-400">$not</span> >= <span class="text-orange-300">85</span>): <span class="text-green-400">echo</span> <span class="text-orange-300">"5 - Pekiyi"</span>; <span class="text-pink-400">break</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">case</span> (<span class="text-purple-400">$not</span> >= <span class="text-orange-300">70</span>): <span class="text-green-400">echo</span> <span class="text-orange-300">"4 - İyi"</span>; <span class="text-pink-400">break</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">case</span> (<span class="text-purple-400">$not</span> >= <span class="text-orange-300">60</span>): <span class="text-green-400">echo</span> <span class="text-orange-300">"3 - Orta"</span>; <span class="text-pink-400">break</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">case</span> (<span class="text-purple-400">$not</span> >= <span class="text-orange-300">50</span>): <span class="text-green-400">echo</span> <span class="text-orange-300">"2 - Geçer"</span>; <span class="text-pink-400">break</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">default</span>: <span class="text-green-400">echo</span> <span class="text-orange-300">"1 - Başarısız"</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>💡 İpucu:</strong> <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs font-mono text-amber-700">switch(true)</code> kullanarak case bloklarında mantıksal ifadeler yazılabilir. Bu teknik aralık kontrolü için oldukça kullanışlıdır.
+                        </div>
+                        <div id="output-11" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> 4 - İyi
+                        </div>
+                        <button onclick="toggleOutput('output-11', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Mevsim Bulma -->
+            <div class="mt-6 bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <button onclick="toggleCollapse('collapse-mevsim', this)" class="w-full p-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">🌸 Mevsim Bulma (switch-case)</h3>
+                        <p class="text-xs text-slate-400">Ay numarasına göre mevsimi belirleme</p>
+                    </div>
+                    <span class="chevron text-slate-400 text-xl transition-transform">▼</span>
+                </button>
+                <div id="collapse-mevsim" class="hidden">
+                    <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$ay</span> = <span class="text-orange-300">5</span>;<br><br>
+                            &nbsp;&nbsp;<span class="text-pink-400">switch</span> (<span class="text-purple-400">$ay</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">case</span> <span class="text-orange-300">12</span>: <span class="text-pink-400">case</span> <span class="text-orange-300">1</span>: <span class="text-pink-400">case</span> <span class="text-orange-300">2</span>: <span class="text-green-400">echo</span> <span class="text-orange-300">"Kış"</span>; <span class="text-pink-400">break</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">case</span> <span class="text-orange-300">3</span>: <span class="text-pink-400">case</span> <span class="text-orange-300">4</span>: <span class="text-pink-400">case</span> <span class="text-orange-300">5</span>: <span class="text-green-400">echo</span> <span class="text-orange-300">"İlkbahar"</span>; <span class="text-pink-400">break</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">case</span> <span class="text-orange-300">6</span>: <span class="text-pink-400">case</span> <span class="text-orange-300">7</span>: <span class="text-pink-400">case</span> <span class="text-orange-300">8</span>: <span class="text-green-400">echo</span> <span class="text-orange-300">"Yaz"</span>; <span class="text-pink-400">break</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">case</span> <span class="text-orange-300">9</span>: <span class="text-pink-400">case</span> <span class="text-orange-300">10</span>: <span class="text-pink-400">case</span> <span class="text-orange-300">11</span>: <span class="text-green-400">echo</span> <span class="text-orange-300">"Sonbahar"</span>; <span class="text-pink-400">break</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">default</span>: <span class="text-green-400">echo</span> <span class="text-orange-300">"Geçersiz ay"</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> Birden fazla <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">case</code> alt alta yazılarak aynı sonucu paylaşmaları sağlanabilir. $ay=5 → Mart-Nisan-Mayıs → <strong>İlkbahar</strong>.
+                        </div>
+                        <div id="output-12" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> İlkbahar
+                        </div>
+                        <button onclick="toggleOutput('output-12', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== SECTION 5: Döngü Alıştırmaları ==================== -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-2xl">🔁</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Döngü Alıştırmaları</h2>
+            </div>
+            <p class="text-slate-600 mb-6 ml-10">for, while döngüleri ve break/continue komutları ile tekrarlı işlemler.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- 1'den 10'a Toplam -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">🔢 1'den 10'a Toplam</h3>
+                        <p class="text-xs text-slate-400 mb-4">for döngüsü ile ardışık toplam</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$toplam</span> = <span class="text-orange-300">0</span>;<br>
+                            &nbsp;&nbsp;<span class="text-pink-400">for</span> (<span class="text-purple-400">$i</span>=<span class="text-orange-300">1</span>; <span class="text-purple-400">$i</span><=<span class="text-orange-300">10</span>; <span class="text-purple-400">$i</span>++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">$toplam</span> += <span class="text-purple-400">$i</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-purple-400">$toplam</span>;<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div id="output-13" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> 55
+                        </div>
+                        <button onclick="toggleOutput('output-13', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 5'e Bölünebilenlerin Toplamı -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">🔢 5'e Bölünebilenlerin Toplamı</h3>
+                        <p class="text-xs text-slate-400 mb-4">1-100 arası 5'in katları</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$toplam</span> = <span class="text-orange-300">0</span>;<br>
+                            &nbsp;&nbsp;<span class="text-pink-400">for</span> (<span class="text-purple-400">$i</span>=<span class="text-orange-300">1</span>; <span class="text-purple-400">$i</span><=<span class="text-orange-300">100</span>; <span class="text-purple-400">$i</span>++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">if</span> (<span class="text-purple-400">$i</span> % <span class="text-orange-300">5</span> == <span class="text-orange-300">0</span>) <span class="text-purple-400">$toplam</span> += <span class="text-purple-400">$i</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-purple-400">$toplam</span>;<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div id="output-14" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> 1050
+                        </div>
+                        <button onclick="toggleOutput('output-14', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Collapsible: Faktöriyel -->
+            <div class="mt-6 bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <button onclick="toggleCollapse('collapse-faktoriyel', this)" class="w-full p-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">🔢 Faktöriyel Hesaplama</h3>
+                        <p class="text-xs text-slate-400">for döngüsü ile faktöriyel hesabı</p>
+                    </div>
+                    <span class="chevron text-slate-400 text-xl transition-transform">▼</span>
+                </button>
+                <div id="collapse-faktoriyel" class="hidden">
+                    <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$sayi</span> = <span class="text-orange-300">5</span>;<br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$faktoriyel</span> = <span class="text-orange-300">1</span>;<br><br>
+                            &nbsp;&nbsp;<span class="text-pink-400">for</span> (<span class="text-purple-400">$i</span>=<span class="text-orange-300">1</span>; <span class="text-purple-400">$i</span><=<span class="text-purple-400">$sayi</span>; <span class="text-purple-400">$i</span>++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">$faktoriyel</span> *= <span class="text-purple-400">$i</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">"$sayi! = "</span> . <span class="text-purple-400">$faktoriyel</span>;<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Adım Adım Açıklama:</strong>
+                            <ul class="list-disc list-inside mt-1 space-y-0.5">
+                                <li>İlk: $faktoriyel = <strong>1</strong></li>
+                                <li>$i=1 → 1 × <strong>1</strong> = <strong>1</strong></li>
+                                <li>$i=2 → <strong>1</strong> × 2 = <strong>2</strong></li>
+                                <li>$i=3 → <strong>2</strong> × 3 = <strong>6</strong></li>
+                                <li>$i=4 → <strong>6</strong> × 4 = <strong>24</strong></li>
+                                <li>$i=5 → <strong>24</strong> × 5 = <strong>120</strong></li>
+                            </ul>
+                        </div>
+                        <div id="output-15" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> 5! = 120
+                        </div>
+                        <button onclick="toggleOutput('output-15', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Asal Sayı -->
+            <div class="mt-6 bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <button onclick="toggleCollapse('collapse-asal', this)" class="w-full p-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">🔍 Asal Sayı Bulma</h3>
+                        <p class="text-xs text-slate-400">1-100 arası asal sayıları listeleyen algoritma</p>
+                    </div>
+                    <span class="chevron text-slate-400 text-xl transition-transform">▼</span>
+                </button>
+                <div id="collapse-asal" class="hidden">
+                    <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-pink-400">for</span> (<span class="text-purple-400">$i</span>=<span class="text-orange-300">2</span>; <span class="text-purple-400">$i</span><=<span class="text-orange-300">100</span>; <span class="text-purple-400">$i</span>++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">$asal</span> = <span class="text-orange-300">true</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">for</span> (<span class="text-purple-400">$j</span>=<span class="text-orange-300">2</span>; <span class="text-purple-400">$j</span><<span class="text-purple-400">$i</span>; <span class="text-purple-400">$j</span>++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">if</span> (<span class="text-purple-400">$i</span> % <span class="text-purple-400">$j</span> == <span class="text-orange-300">0</span>) { <span class="text-purple-400">$asal</span>=<span class="text-orange-300">false</span>; <span class="text-pink-400">break</span>; }<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">if</span> (<span class="text-purple-400">$asal</span>) <span class="text-green-400">echo</span> <span class="text-purple-400">$i</span> . <span class="text-orange-300">" "</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Algoritma Açıklaması:</strong> Bir sayının asal olması için 2'den kendisine kadar hiçbir sayıya tam bölünmemesi gerekir. İç döngüde bölen kontrolü yapılır, bölünürse <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">break</code> ile çıkılır.
+                        </div>
+                        <div id="output-16" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97
+                        </div>
+                        <button onclick="toggleOutput('output-16', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: While Döngüsü -->
+            <div class="mt-6 bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <button onclick="toggleCollapse('collapse-while', this)" class="w-full p-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">🔁 While Döngüsü Örneği</h3>
+                        <p class="text-xs text-slate-400">100'den 50'ye azalan sayılar</p>
+                    </div>
+                    <span class="chevron text-slate-400 text-xl transition-transform">▼</span>
+                </button>
+                <div id="collapse-while" class="hidden">
+                    <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$sayac</span> = <span class="text-orange-300">100</span>;<br><br>
+                            &nbsp;&nbsp;<span class="text-pink-400">while</span> (<span class="text-purple-400">$sayac</span> >= <span class="text-orange-300">50</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-purple-400">$sayac</span> . <span class="text-orange-300">" "</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">$sayac</span>--;&nbsp;&nbsp;<span class="text-slate-500">// azaltmayı unutma!</span><br>
+                            &nbsp;&nbsp;}<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-red-50 border-l-4 border-red-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>⚠️ Uyarı:</strong> Sayacı azaltmayı (<code class="bg-red-100 px-1.5 py-0.5 rounded text-xs font-mono text-red-700">$sayac--</code>) unutursanız <strong>sonsuz döngü</strong> oluşur ve sayfa çöker!
+                        </div>
+                        <div id="output-17" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> 100 99 98 97 ... 52 51 50
+                        </div>
+                        <button onclick="toggleOutput('output-17', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: break ve continue -->
+            <div class="mt-6 bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <button onclick="toggleCollapse('collapse-break', this)" class="w-full p-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">⏹️ break ve continue Kullanımı</h3>
+                        <p class="text-xs text-slate-400">Döngü kontrol komutları</p>
+                    </div>
+                    <span class="chevron text-slate-400 text-xl transition-transform">▼</span>
+                </button>
+                <div id="collapse-break" class="hidden">
+                    <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+                        <h4 class="font-semibold text-slate-700 mb-2">break Örneği (5'te dur):</h4>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-pink-400">for</span> (<span class="text-purple-400">$i</span>=<span class="text-orange-300">1</span>; <span class="text-purple-400">$i</span><=<span class="text-orange-300">10</span>; <span class="text-purple-400">$i</span>++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">if</span> (<span class="text-purple-400">$i</span> == <span class="text-orange-300">5</span>) <span class="text-pink-400">break</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-purple-400">$i</span> . <span class="text-orange-300">" "</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div id="output-18a" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in mb-4">
+                            <strong>✅ break Çıktısı:</strong> 1 2 3 4
+                        </div>
+                        <button onclick="toggleOutput('output-18a', this)" class="mt-2 mb-6 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+
+                        <h4 class="font-semibold text-slate-700 mb-2">continue Örneği (5'i atla):</h4>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-pink-400">for</span> (<span class="text-purple-400">$i</span>=<span class="text-orange-300">1</span>; <span class="text-purple-400">$i</span><=<span class="text-orange-300">10</span>; <span class="text-purple-400">$i</span>++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">if</span> (<span class="text-purple-400">$i</span> == <span class="text-orange-300">5</span>) <span class="text-pink-400">continue</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-purple-400">$i</span> . <span class="text-orange-300">" "</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">break</code> döngüyü tamamen sonlandırır. <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">continue</code> ise sadece o adımı atlar, döngü devam eder.
+                        </div>
+                        <div id="output-18b" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ continue Çıktısı:</strong> 1 2 3 4 6 7 8 9 10
+                        </div>
+                        <button onclick="toggleOutput('output-18b', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== SECTION 6: Dizi Uygulamaları ==================== -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-2xl">📚</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Dizi Uygulamaları</h2>
+            </div>
+            <p class="text-slate-600 mb-6 ml-10">Dizi oluşturma, elemanlara erişim ve sıralama işlemleri.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- Dizi Oluşturma ve Erişim -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">📋 Dizi Oluşturma ve Erişim</h3>
+                        <p class="text-xs text-slate-400 mb-4">Dizi elemanlarına ulaşma yöntemleri</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$ogrenciler</span> = [<span class="text-orange-300">"Ali"</span>,<span class="text-orange-300">"Veli"</span>,<span class="text-orange-300">"Ayşe"</span>,<span class="text-orange-300">"Fatma"</span>];<br><br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">count</span>(<span class="text-purple-400">$ogrenciler</span>);&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// 4</span><br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-purple-400">$ogrenciler</span>[<span class="text-orange-300">0</span>];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// Ali</span><br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-purple-400">$ogrenciler</span>[<span class="text-cyan-400">count</span>(<span class="text-purple-400">$ogrenciler</span>)-<span class="text-orange-300">1</span>];&nbsp;<span class="text-slate-500">// son eleman: Fatma</span><br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> Dizi indeksleri <strong>0</strong>'dan başlar. <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">count()</code> ile eleman sayısı, <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">$dizi[count($dizi)-1]</code> ile son elemana erişilir.
+                        </div>
+                        <div id="output-19" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> 4 &nbsp;|&nbsp; Ali &nbsp;|&nbsp; Fatma
+                        </div>
+                        <button onclick="toggleOutput('output-19', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dizi Sıralama -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">🔄 Dizi Sıralama</h3>
+                        <p class="text-xs text-slate-400 mb-4">sort(), rsort(), max(), min() kullanımı</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$sayilar</span> = [<span class="text-orange-300">8</span>,<span class="text-orange-300">3</span>,<span class="text-orange-300">15</span>,<span class="text-orange-300">1</span>,<span class="text-orange-300">9</span>];<br><br>
+                            &nbsp;&nbsp;<span class="text-cyan-400">sort</span>(<span class="text-purple-400">$sayilar</span>);<br>
+                            &nbsp;&nbsp;<span class="text-green-400">print_r</span>(<span class="text-purple-400">$sayilar</span>);&nbsp;<span class="text-slate-500">// 1,3,8,9,15</span><br><br>
+                            &nbsp;&nbsp;<span class="text-cyan-400">rsort</span>(<span class="text-purple-400">$sayilar</span>);<br>
+                            &nbsp;&nbsp;<span class="text-green-400">print_r</span>(<span class="text-purple-400">$sayilar</span>);&nbsp;<span class="text-slate-500">// 15,9,8,3,1</span><br><br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">max</span>(<span class="text-purple-400">$sayilar</span>); <span class="text-slate-500">// 15</span><br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">min</span>(<span class="text-purple-400">$sayilar</span>); <span class="text-slate-500">// 1</span><br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">sort()</code> küçükten büyüğe, <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">rsort()</code> büyükten küçüğe sıralar. <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">max()</code> ve <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">min()</code> en büyük/küçük değeri bulur.
+                        </div>
+                        <div id="output-20" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> sort: [1, 3, 8, 9, 15]<br>rsort: [15, 9, 8, 3, 1]<br>max: 15, min: 1
+                        </div>
+                        <button onclick="toggleOutput('output-20', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 7: Fonksiyon Uygulamaları ==================== -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-2xl">⚙️</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Fonksiyon Uygulamaları</h2>
+            </div>
+            <p class="text-slate-600 mb-6 ml-10">Kendi fonksiyonlarımızı yazma ve dış dosyadan çağırma yöntemleri.</p>
+
+            <!-- Collapsible: Parametreli Fonksiyonlar -->
+            <div class="mb-6 bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <button onclick="toggleCollapse('collapse-fonksiyon', this)" class="w-full p-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">📦 Parametreli Fonksiyonlar</h3>
+                        <p class="text-xs text-slate-400">Belirli aralıktaki sayıları toplayan fonksiyon</p>
+                    </div>
+                    <span class="chevron text-slate-400 text-xl transition-transform">▼</span>
+                </button>
+                <div id="collapse-fonksiyon" class="hidden">
+                    <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-pink-400">function</span> <span class="text-cyan-400">aralikTopla</span>(<span class="text-purple-400">$baslangic</span>, <span class="text-purple-400">$bitis</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">$toplam</span> = <span class="text-orange-300">0</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">for</span> (<span class="text-purple-400">$i</span>=<span class="text-purple-400">$baslangic</span>; <span class="text-purple-400">$i</span><=<span class="text-purple-400">$bitis</span>; <span class="text-purple-400">$i</span>++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">$toplam</span> += <span class="text-purple-400">$i</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-400">return</span> <span class="text-purple-400">$toplam</span>;<br>
+                            &nbsp;&nbsp;}<br><br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">aralikTopla</span>(<span class="text-orange-300">1</span>,<span class="text-orange-300">100</span>);&nbsp;&nbsp;<span class="text-slate-500">// 5050</span><br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">aralikTopla</span>(<span class="text-orange-300">50</span>,<span class="text-orange-300">150</span>);&nbsp;<span class="text-slate-500">// 10100</span><br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> Fonksiyonlar <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">function</code> anahtar kelimesiyle tanımlanır. Parametre alarak farklı değerlerle tekrar kullanılabilir. <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">return</code> ile sonuç döndürülür.
+                        </div>
+                        <div id="output-21" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> 5050 &nbsp;|&nbsp; 10100
+                        </div>
+                        <button onclick="toggleOutput('output-21', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Dışarıdan Fonksiyon Çağırma -->
+            <div class="mb-6 bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <button onclick="toggleCollapse('collapse-require', this)" class="w-full p-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">📂 Dışarıdan Fonksiyon Çağırma</h3>
+                        <p class="text-xs text-slate-400">require/include ile dosya dahil etme</p>
+                    </div>
+                    <span class="chevron text-slate-400 text-xl transition-transform">▼</span>
+                </button>
+                <div id="collapse-require" class="hidden">
+                    <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+                        <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>⚠️ Not:</strong> Gerçek kullanımda dosya isimleri anlamlı olmalıdır. Slaytlarda <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs font-mono text-amber-700">deneme.php</code>, <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs font-mono text-amber-700">fff.php</code> gibi isimler yerine <strong>matematik.php</strong>, <strong>fonksiyonlar.php</strong> gibi anlamlı isimler kullanın!
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <h4 class="font-semibold text-slate-700 mb-2 text-sm">📄 matematik.php</h4>
+                                <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                                    <span class="text-blue-400">&lt;?php</span><br>
+                                    &nbsp;&nbsp;<span class="text-pink-400">function</span> <span class="text-cyan-400">kare</span>(<span class="text-purple-400">$x</span>) { <span class="text-pink-400">return</span> <span class="text-purple-400">$x</span>*<span class="text-purple-400">$x</span>; }<br>
+                                    &nbsp;&nbsp;<span class="text-pink-400">function</span> <span class="text-cyan-400">kup</span>(<span class="text-purple-400">$x</span>) { <span class="text-pink-400">return</span> <span class="text-purple-400">$x</span>*<span class="text-purple-400">$x</span>*<span class="text-purple-400">$x</span>; }<br>
+                                    &nbsp;&nbsp;<span class="text-pink-400">function</span> <span class="text-cyan-400">ortalama</span>(<span class="text-purple-400">$a</span>,<span class="text-purple-400">$b</span>) { <span class="text-pink-400">return</span> (<span class="text-purple-400">$a</span>+<span class="text-purple-400">$b</span>)/<span class="text-orange-300">2</span>; }<br>
+                                    <span class="text-blue-400">?&gt;</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-700 mb-2 text-sm">📄 index.php (ana dosya)</h4>
+                                <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                                    <span class="text-blue-400">&lt;?php</span><br>
+                                    &nbsp;&nbsp;<span class="text-pink-400">require</span> <span class="text-orange-300">"matematik.php"</span>;<br><br>
+                                    &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">kare</span>(<span class="text-orange-300">4</span>);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// 16</span><br>
+                                    &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">kup</span>(<span class="text-orange-300">3</span>);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// 27</span><br>
+                                    &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-cyan-400">ortalama</span>(<span class="text-orange-300">10</span>,<span class="text-orange-300">20</span>);<span class="text-slate-500">// 15</span><br>
+                                    <span class="text-blue-400">?&gt;</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">require</code> dosyayı dahil eder, bulamazsa ölümcül hata (fatal error) verir. <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">include</code> ise uyarı (warning) verip devam eder.
+                        </div>
+                        <div id="output-22" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> 16 &nbsp;|&nbsp; 27 &nbsp;|&nbsp; 15
+                        </div>
+                        <button onclick="toggleOutput('output-22', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== SECTION 8: Ek Fonksiyon Uygulamaları ==================== -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-2xl">🧰</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Ek Fonksiyon Uygulamaları</h2>
+            </div>
+            <p class="text-slate-600 mb-6 ml-10">isset(), empty() ve header() gibi önemli PHP fonksiyonları.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- isset() ve empty() -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">🔍 isset() ve empty()</h3>
+                        <p class="text-xs text-slate-400 mb-4">Değişken kontrol fonksiyonları</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$var1</span> = <span class="text-orange-300">""</span>;;<br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$var2</span> = <span class="text-orange-300">"merhaba"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-purple-400">$var3</span>;&nbsp;&nbsp;<span class="text-slate-500">// tanımsız</span><br><br>
+                            &nbsp;&nbsp;<span class="text-green-400">var_dump</span>(<span class="text-cyan-400">isset</span>(<span class="text-purple-400">$var1</span>));&nbsp;<span class="text-slate-500">// true (tanımlı)</span><br>
+                            &nbsp;&nbsp;<span class="text-green-400">var_dump</span>(<span class="text-cyan-400">empty</span>(<span class="text-purple-400">$var1</span>));&nbsp;<span class="text-slate-500">// true (boş)</span><br><br>
+                            &nbsp;&nbsp;<span class="text-green-400">var_dump</span>(<span class="text-cyan-400">isset</span>(<span class="text-purple-400">$var2</span>));&nbsp;<span class="text-slate-500">// true (tanımlı)</span><br>
+                            &nbsp;&nbsp;<span class="text-green-400">var_dump</span>(<span class="text-cyan-400">empty</span>(<span class="text-purple-400">$var2</span>));&nbsp;<span class="text-slate-500">// false (dolu)</span><br><br>
+                            &nbsp;&nbsp;<span class="text-green-400">var_dump</span>(<span class="text-cyan-400">isset</span>(<span class="text-purple-400">$var3</span>));&nbsp;<span class="text-slate-500">// false (tanımsız)</span><br>
+                            &nbsp;&nbsp;<span class="text-green-400">var_dump</span>(<span class="text-cyan-400">empty</span>(<span class="text-purple-400">$var3</span>));&nbsp;<span class="text-slate-500">// true (tanımsız=boş)</span><br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>📝 Açıklama:</strong> <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">isset()</code> değişken tanımlı ve NULL değilse true döner. <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono text-blue-700">empty()</code> değişken boş, 0, "", null, false ise true döner.
+                        </div>
+                        <div id="output-23" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong><br>
+                            isset($var1) → bool(true)<br>
+                            empty($var1) → bool(true)<br>
+                            isset($var2) → bool(true)<br>
+                            empty($var2) → bool(false)<br>
+                            isset($var3) → bool(false)<br>
+                            empty($var3) → bool(true)
+                        </div>
+                        <button onclick="toggleOutput('output-23', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- header() - Yönlendirme -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">🔗 header() - Yönlendirme</h3>
+                        <p class="text-xs text-slate-400 mb-4">Sayfa yönlendirme yöntemleri</p>
+                        <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm mb-4 overflow-x-auto">
+                            <span class="text-blue-400">&lt;?php</span><br><br>
+                            &nbsp;&nbsp;<span class="text-slate-500">// Anında yönlendirme</span><br>
+                            &nbsp;&nbsp;<span class="text-cyan-400">header</span>(<span class="text-orange-300">"Location: ana-sayfa.php"</span>);<br>
+                            &nbsp;&nbsp;<span class="text-pink-400">exit</span>;<br><br>
+                            &nbsp;&nbsp;<span class="text-slate-500">// Gecikmeli yönlendirme</span><br>
+                            &nbsp;&nbsp;<span class="text-cyan-400">header</span>(<span class="text-orange-300">"Refresh: 3; url=ana-sayfa.php"</span>);<br>
+                            &nbsp;&nbsp;<span class="text-green-400">echo</span> <span class="text-orange-300">"3 saniye içinde yönlendiriliyorsunuz..."</span>;<br><br>
+                            <span class="text-blue-400">?&gt;</span>
+                        </div>
+                        <div class="bg-red-50 border-l-4 border-red-400 rounded-r-lg p-3 mb-4 text-sm text-slate-700">
+                            <strong>⚠️ ÇOK ÖNEMLİ:</strong> <code class="bg-red-100 px-1.5 py-0.5 rounded text-xs font-mono text-red-700">header()</code> fonksiyonu çağrılmadan önce <strong>hiçbir çıktı</strong> (echo, HTML, boşluk, BOM) olmamalıdır! Aksi halde "headers already sent" hatası alırsınız.
+                        </div>
+                        <div id="output-24" class="hidden bg-green-50 border-l-4 border-green-400 rounded-r-lg p-3 text-sm text-slate-700 animate-fade-in">
+                            <strong>✅ Çıktı:</strong> Sayfa ana-sayfa.php'ye yönlendirilir (veya 3 sn sonra yönlendirilir)
+                        </div>
+                        <button onclick="toggleOutput('output-24', this)" class="mt-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors font-medium text-sm flex items-center gap-2">
+                            <span>👁️</span> <span class="btn-text">Çıktıyı Göster</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Success Banner -->
+        <section class="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-2xl p-8 md:p-12 text-white text-center shadow-lg">
+            <span class="text-5xl mb-4 block">🎉</span>
+            <h2 class="text-2xl md:text-3xl font-extrabold mb-3">Tüm Konuları Tamamladınız!</h2>
+            <p class="text-white/90 text-lg mb-6 max-w-2xl mx-auto leading-relaxed">
+                PHP'nin temel konularını başarıyla gözden geçirdiniz. Şimdi öğrendiklerinizi pekiştirmek için 
+                Soru-Cevap sayfasındaki soruları çözebilir veya Test sayfasındaki testleri çözerek kendinizi değerlendirebilirsiniz.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="soru-cevap.html" class="px-6 py-3 bg-white text-emerald-600 rounded-xl font-bold hover:bg-emerald-50 transition-colors shadow-md inline-flex items-center gap-2">
+                    ❓ Soru-Cevap Sayfası
+                </a>
+                <a href="test.html" class="px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-xl font-bold hover:bg-white/30 transition-colors border border-white/30 inline-flex items-center gap-2">
+                    📋 Teste Başla
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 bg-white mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+            <p class="text-slate-500 text-sm">
+                📚 İnternet Programcılığı-I | Öğr. Gör. Merve BABAOĞLU
+            </p>
+            <p class="text-slate-400 text-xs mt-1">
+                2025-2026 Dönemi | PHP Çalışma Sayfası &copy; 2026
+            </p>
+            <p class="text-slate-400 text-xs mt-1">
+                Hazırlayan: <strong>İslam ERGÜN - DEVNANOTEK</strong>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleOutput(outputId, button) {
+            const output = document.getElementById(outputId);
+            const btnText = button.querySelector('.btn-text');
+            const icon = button.querySelector('span');
+
+            if (output.classList.contains('hidden')) {
+                output.classList.remove('hidden');
+                output.classList.add('animate-fade-in');
+                btnText.textContent = 'Çıktıyı Gizle';
+                icon.textContent = '🙈';
+            } else {
+                output.classList.add('hidden');
+                output.classList.remove('animate-fade-in');
+                btnText.textContent = 'Çıktıyı Göster';
+                icon.textContent = '👁️';
+            }
+        }
+
+        function toggleCollapse(collapseId, button) {
+            const collapse = document.getElementById(collapseId);
+            const chevron = button.querySelector('.chevron');
+
+            if (collapse.classList.contains('hidden')) {
+                collapse.classList.remove('hidden');
+                collapse.classList.add('animate-slide-down');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                collapse.classList.add('hidden');
+                collapse.classList.remove('animate-slide-down');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+
+</body>
+</html>
